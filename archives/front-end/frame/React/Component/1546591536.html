@@ -566,7 +566,7 @@
 <p>这个函数指定了 style 覆盖到为名为<code>$style</code>的 prop，并将其与其他的覆盖 prop 合并到一起——这主要是因为我们使用 CSS-in-JS 实现了查找<code>$style</code>并将其与默认样式深度合并。</p>
 <p>每个子组件也接受<code>sharedProps</code>，它可以用于动态更改样式或渲染——例如，在出现错误时将 border-color 设置为 red。我们将这些 props 添加<code>$</code>前缀作为一个命名规则的约定，以表明这些是特殊的 props，不应该传递给底层的 DOM 元素。</p>
 <h2 id="quan-heng-amp-xian-jing"><a class="header-anchor" href="#权衡-陷阱"></a>权衡 &amp; 陷阱</h2>
-<p>与大多数设计模式一样，在使用覆盖模式的时候也需要全更一些因素。</p>
+<p>与大多数设计模式一样，在使用覆盖模式的时候也需要权衡一些因素。</p>
 <h3 id="gang-xing"><a class="header-anchor" href="#刚性"></a>刚性</h3>
 <p>因为每个内部元素都有一个标识符并作为覆盖的目标公开，所以更改 DOM 结构可能会导致超出预期的变化出现频次高于正常情况。对于 CSS 的变化来说也会有同样的问题——改变元素样式从<code>display: flex</code>到<code>display: block</code>理论上同样是个重大的改变，如果使用者觉得这是一个 flexbox 的内部并这样覆盖其中一个子元素的样式。通常都整齐封装的组件实际上可能会使下游受到影响从而出现问题。</p>
 <p>所以的这些都意味着你可能需要更加小心地改变组件的 DOM 结构或者样式，并且不要害怕当一个主要版本的修改受到质疑的时候。</p>
