@@ -1,0 +1,2282 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CH,zh-cn,en,default">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=6.6.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-z.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-z.png?v=6.6.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <meta name="description" content="在 JavaScript 的模块中,首先我们可以把语言按照文法、语义和运行时来拆分,这符合编程语言的一般规律: 用一定的词法和语句,表达一定语句,从而操作运行时。">
+<meta name="keywords" content="笔记,重学前端,JavaScript,ECMAScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 整理">
+<meta property="og:url" content="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415.html">
+<meta property="og:site_name" content="Zakary Zhu&#39;s Blog">
+<meta property="og:description" content="在 JavaScript 的模块中,首先我们可以把语言按照文法、语义和运行时来拆分,这符合编程语言的一般规律: 用一定的词法和语句,表达一定语句,从而操作运行时。">
+<meta property="og:locale" content="zh-CH">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415/event-loop.jpg">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415/The-mechanical-evaluation-of-expressions.png">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415/JavaScript-execution-stack.jpg">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415/chrome-console-sentence-execution.png">
+<meta property="og:updated_time" content="2019-04-25T03:34:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript 整理">
+<meta name="twitter:description" content="在 JavaScript 的模块中,首先我们可以把语言按照文法、语义和运行时来拆分,这符合编程语言的一般规律: 用一定的词法和语句,表达一定语句,从而操作运行时。">
+<meta name="twitter:image" content="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415/event-loop.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zakary Zhu's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript 整理 | Zakary Zhu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CH">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zakary Zhu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Try to find the way about self-improvement.</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL1pha2FyeUNvZGU=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZakaryCode">
+      <meta itemprop="description" content="日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。">
+      <meta itemprop="image" content="/images/Z.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zakary Zhu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JavaScript 整理
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-23 11:00:15" itemprop="dateCreated datePublished" datetime="2019-04-23T11:00:15+08:00">2019-04-23</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-04-25 11:34:15" itemprop="dateModified" datetime="2019-04-25T11:34:15+08:00">2019-04-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/front-end/JavaScript/1555988415.html#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="archives/front-end/JavaScript/1555988415.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>  在 JavaScript 的模块中,首先我们可以把语言按照文法、语义和运行时来拆分,这符合编程语言的一般规律: <strong>用一定的词法和语句,表达一定语句,从而操作运行时</strong>。</p>
+<a id="more"></a>
+<h2 id="yu-yi"><a class="header-anchor" href="#语义"></a>语义</h2>
+<h2 id="wen-fa"><a class="header-anchor" href="#文法"></a>文法</h2>
+<h3 id="ci-fa"><a class="header-anchor" href="#词法"></a>词法</h3>
+<h3 id="yu-fa"><a class="header-anchor" href="#语法"></a>语法</h3>
+<h2 id="yun-xing-shi"><a class="header-anchor" href="#运行时"></a>运行时</h2>
+<p>按照程序的一般规律,把运行时分为数据结构和算法部分: 数据结构包含类型和实例(JavaScript 的类型系统就是它的 7 种基本类型和 7 种语言类型,实例就是它的内置对象部分)。所谓算法就是 JavaScript 的执行过程。</p>
+<h3 id="a-href-https-developer-mozilla-org-en-us-docs-web-java-script-data-structures-shu-ju-jie-gou-a"><a class="header-anchor" href="#数据结构"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9EYXRhX3N0cnVjdHVyZXM=" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures">数据结构<i class="fa fa-external-link"></i></span></h3>
+<h4 id="lei-xing"><a class="header-anchor" href="#类型"></a>类型</h4>
+<blockquote>
+<p>JavaScript 的 7 种语言类型,包括 6 种原始数据类型和 Object</p>
+</blockquote>
+<ol>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9VbmRlZmluZWQ=" title="https://developer.mozilla.org/en-US/docs/Glossary/Undefined">Undefined<i class="fa fa-external-link"></i></span>
+<ul>
+<li><strong>含义:</strong> 尚未赋值的变量的值<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvdW5kZWZpbmVk" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code><i class="fa fa-external-link"></i></span></li>
+<li><strong>取值:</strong> <code>undefined</code> (也可以通过<code>void 0</code>得到)</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9OdWxs" title="https://developer.mozilla.org/en-US/docs/Glossary/Null">Null<i class="fa fa-external-link"></i></span>
+<ul>
+<li><strong>含义:</strong> 表示变量值为<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTnVsbA==" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Null"><code>null</code><i class="fa fa-external-link"></i></span></li>
+<li><strong>取值:</strong> <code>null</code></li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9Cb29sZWFu" title="https://developer.mozilla.org/en-US/docs/Glossary/Boolean">Boolean<i class="fa fa-external-link"></i></span>
+<ul>
+<li><strong>含义:</strong> <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvQm9vbGVhbg==" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean<i class="fa fa-external-link"></i></span>表示逻辑意义上的真或假</li>
+<li><strong>取值:</strong> <code>true</code>, <code>false</code></li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9TdHJpbmc=" title="https://developer.mozilla.org/en-US/docs/Glossary/String">String<i class="fa fa-external-link"></i></span>
+<ul>
+<li><strong>含义:</strong> <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3RyaW5n" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String<i class="fa fa-external-link"></i></span>表示文本数据 (采用 UTF16 编码, 处理非 BMP 的字符符需要格外小心)</li>
+<li><strong>取值:</strong> 最大长度为<code>2^53-1</code></li>
+<li><strong>Note:</strong> 现行的字符集国际标准,字符是以 Unicode 的方式表示的,每一个 Unicode 的码点表示一个字符,理论上,Unicode 的范围是无限的。UTF 是 Unicode 的编码方式,规定了码点在计算机中的表示方法,常见的有 UTF16 和 UTF8。 Unicode 的码点通常用 U+??? 来表示,其中 ??? 是十六进制的码点值。 0-65536(U+0000 - U+FFFF)的码点被称为基本字符区域(BMP)。</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9OdW1iZXI=" title="https://developer.mozilla.org/en-US/docs/Glossary/Number">Number<i class="fa fa-external-link"></i></span>
+<ul>
+<li><strong>含义:</strong> <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvTnVtYmVy" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number<i class="fa fa-external-link"></i></span>表示数字 (<span class="exturl" data-url="aHR0cHM6Ly9lbi53aWtpcGVkaWEub3JnL3dpa2kvRG91YmxlLXByZWNpc2lvbl9mbG9hdGluZy1wb2ludF9mb3JtYXQ=" title="https://en.wikipedia.org/wiki/Double-precision_floating-point_format">Number 是双精度 64 位浮点格式(IEEE 754)<i class="fa fa-external-link"></i></span>中的数字数据类型)</li>
+<li><strong>取值:</strong> 取值范围 [-(2^53 -1) , 2^53 -1]</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9TeW1ib2w=" title="https://developer.mozilla.org/en-US/docs/Glossary/Symbol">Symbol<i class="fa fa-external-link"></i></span> (new in ECMAScript 6)
+<ul>
+<li><strong>含义:</strong> <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvU3ltYm9s" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol<i class="fa fa-external-link"></i></span>是一个唯一的不可变的原始值</li>
+<li><strong>取值:</strong> 使用全局的<code>Symbol</code>函数创建 (不可以使用 new 创建 Symbol 对象, Symbol 值不能进行运算)</li>
+</ul>
+</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9HbG9zc2FyeS9PYmplY3Q=" title="https://developer.mozilla.org/en-US/docs/Glossary/Object">Object<i class="fa fa-external-link"></i></span>
+<ul>
+<li><strong>含义:</strong> <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvT2JqZWN0" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object<i class="fa fa-external-link"></i></span>可以看做属性的集合</li>
+<li>Object 属性主要分成两类 (通常用于定义属性的代码会产生数据属性,其中的 <code>writable</code>、<code>enumerable</code>、<code>configurable</code> 都默认为 <code>true</code>。</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>JavaScript 的 7 种规范类型</p>
+</blockquote>
+<ol>
+<li>List 和 Record: 用于描述函数传参过程。</li>
+<li>Set: 主要用于解释字符集等。</li>
+<li>Completion Record: 用于描述异常、跳出等语句执行过程。</li>
+<li>Reference: 用于描述对象属性访问、delete 等。</li>
+<li>Property Descriptor: 用于描述对象的属性。</li>
+<li>Lexical Environment 和 Environment Record: 用于描述变量和作用域。</li>
+<li>Data Block: 用于描述二进制数据。</li>
+</ol>
+<h5 id="a-href-https-developer-mozilla-org-en-us-docs-web-java-script-data-structures-objects-object-dui-xiang-a"><a class="header-anchor" href="#object-对象"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9EYXRhX3N0cnVjdHVyZXMjT2JqZWN0cw==" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Objects">Object 对象<i class="fa fa-external-link"></i></span></h5>
+<blockquote>
+<p>JavaScript 对象是键和值之间的映射。</p>
+</blockquote>
+<h6 id="a-href-https-developer-mozilla-org-en-us-docs-web-java-script-data-structures-properties-properties-shu-xing-a"><a class="header-anchor" href="#properties-属性"></a><span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9EYXRhX3N0cnVjdHVyZXMjUHJvcGVydGllcw==" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures#Properties">Properties 属性<i class="fa fa-external-link"></i></span></h6>
+<blockquote>
+<p>使用<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9HdWlkZS9WYWx1ZXMsX3ZhcmlhYmxlcyxfYW5kX2xpdGVyYWxzI09iamVjdF9saXRlcmFscw==" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Values,_variables,_and_literals#Object_literals">对象文字语法<i class="fa fa-external-link"></i></span>,初始化一组有限的属性;然后可以添加和删除属性。<br>
+属性值可以是任何类型的值,包括其他对象,这使得能够构建复杂的数据结构。使用键值标识属性。键值是<code>String</code>或<code>Symbol</code>值。<br>
+Object 属性主要分成两类: <code>数据属性</code>和<code>访问器属性</code>。</p>
+</blockquote>
+<ul>
+<li>数据属性: 大多数时候我们只关心数据属性的值
+<ul>
+<li>value: 就是属性的值</li>
+<li>writable: 决定属性能否被赋值</li>
+<li>enumerable: 决定 for in 能否枚举该属性</li>
+<li>configurable: 决定该属性能否被删除或者改变特征值</li>
+</ul>
+</li>
+<li>访问器属性: 每次访问属性,都会执行 getter 或者 setter 函数
+<ul>
+<li>getter: 函数或 undefined,在取属性值时被调用</li>
+<li>setter: 函数或 undefined,在设置属性值时被调用</li>
+<li>enumerable: 决定 for in 能否枚举该属性</li>
+<li>configurable: 决定该属性能否被删除或者改变特征值</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>我们可以使用内置函数 <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvT2JqZWN0L2dldE93blByb3BlcnR5RGVzY3JpcHRvcg==" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyDescriptor">Object.getOwnPropertyDescriptor(obj, prop)<i class="fa fa-external-link"></i></span> 来查看;也可以使用<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvSmF2YVNjcmlwdC9SZWZlcmVuY2UvR2xvYmFsX09iamVjdHMvT2JqZWN0L2RlZmluZVByb3BlcnR5" title="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">Object.defineProperty(obj, prop, descriptor)<br>
+<i class="fa fa-external-link"></i></span>来定义属性。</p>
+</blockquote>
+<h4 id="shi-li"><a class="header-anchor" href="#实例"></a>实例</h4>
+<blockquote>
+<p>JavaScript 的实例对象主要分成宿主对象和内置对象两个部分</p>
+</blockquote>
+<ul>
+<li>
+<p>宿主对象(host Objects): 由 JavaScript 宿主环境提供的对象,它们的行为完全由宿主环境决定。(宿主对象也分为固有的和用户可创建的两种,比如 document.createElement 就可以创建一些 dom 对象。)</p>
+</li>
+<li>
+<p>内置对象(Built-in Objects): 由 JavaScript 语言提供的对象。</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly90YzM5LmdpdGh1Yi5pby9lY21hMjYyLyNzZWMtd2VsbC1rbm93bi1pbnRyaW5zaWMtb2JqZWN0cw==" title="https://tc39.github.io/ecma262/#sec-well-known-intrinsic-objects">固有对象(Intrinsic Objects)<i class="fa fa-external-link"></i></span>: 由标准规定,随着 JavaScript 运行时创建而自动创建的对象实例。</li>
+<li>原生对象(Native Objects): 可以由用户通过 Array、RegExp 等内置构造器或者特殊语法创建的对象。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>基本类型</th>
+<th>基础功能和数据结构</th>
+<th>错误类型</th>
+<th>二进制操作</th>
+<th>带类型的数组</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boolean</td>
+<td>Array</td>
+<td>Error</td>
+<td>ArrayBuffer</td>
+<td>Float32Array</td>
+</tr>
+<tr>
+<td>String</td>
+<td>Date</td>
+<td>EvalError</td>
+<td>SharedArrayBuffer</td>
+<td>Float64Array</td>
+</tr>
+<tr>
+<td>Number</td>
+<td>RegExp</td>
+<td>RangeError</td>
+<td>DataView</td>
+<td>Int8Array</td>
+</tr>
+<tr>
+<td>Symbol</td>
+<td>Promise</td>
+<td>ReferenceError</td>
+<td></td>
+<td>Int16Array</td>
+</tr>
+<tr>
+<td>Object</td>
+<td>Proxy</td>
+<td>SyntaxError</td>
+<td></td>
+<td>Int32Array</td>
+</tr>
+<tr>
+<td></td>
+<td>Map</td>
+<td>TypeError</td>
+<td></td>
+<td>UInt8Array</td>
+</tr>
+<tr>
+<td></td>
+<td>WeakMap</td>
+<td>URIError</td>
+<td></td>
+<td>UInt16Array</td>
+</tr>
+<tr>
+<td></td>
+<td>Set</td>
+<td></td>
+<td></td>
+<td>UInt32Array</td>
+</tr>
+<tr>
+<td></td>
+<td>WeakSet</td>
+<td></td>
+<td></td>
+<td>UInt8ClampendArray</td>
+</tr>
+<tr>
+<td></td>
+<td>Function</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>普通对象(Ordinary Objects): 由{}语法、Object 构造器或者 class 关键字定义类创建的对象,它能够被原型继承。</li>
+</ul>
+</li>
+</ul>
+<h5 id="ying-yong-he-ji-zhi"><a class="header-anchor" href="#应用和机制"></a>应用和机制</h5>
+<h3 id="zhi-xing-guo-cheng-suan-fa"><a class="header-anchor" href="#执行过程-算法"></a>执行过程(算法)</h3>
+<p>如果我们是浏览器或者 Node 的开发者，我们该如何使用 JavaScript 引擎。</p>
+<p>当拿到一段 JavaScript 代码时，浏览器或者 Node 环境首先要做的就是；传递给 JavaScript 引擎，并且要求它去执行。</p>
+<p>然而，执行 JavaScript 并非一锤子买卖，宿主环境当遇到一些事件时，会继续把一段代码传递给 JavaScript 引擎去执行，此外，我们可能还会提供 API 给 JavaScript 引擎，比如 setTimeout 这样的 API，它会允许 JavaScript 在特定的时机执行。</p>
+<p>所以，我们首先应该形成一个感性的认知: 一个 JavaScript 引擎会常驻于内存中，它等待着我们（宿主）把 JavaScript 代码或者函数传递给它执行。</p>
+<p>在 ES3 和更早的版本中，JavaScript 本身还没有异步执行代码的能力，这也就意味着，宿主环境传递给 JavaScript 引擎一段代码，引擎就把代码直接顺次执行了，这个任务也就是宿主发起的任务。</p>
+<p>但是，在 ES5 之后，JavaScript 引入了 Promise，这样，不需要浏览器的安排，JavaScript 引擎本身也可以发起任务了。</p>
+<p>由于我们这里主要讲 JavaScript 语言，那么采纳 JSC 引擎的术语，我们把宿主发起的任务称为宏观任务，把 JavaScript 引擎发起的任务称为微观任务。</p>
+<h4 id="shi-jian-xun-huan"><a class="header-anchor" href="#事件循环"></a>事件循环</h4>
+<p>JavaScript 引擎等待宿主环境分配宏观任务，在操作系统中，通常等待的行为都是一个事件循环，所以在 Node 术语中，也会把这个部分称为事件循环。</p>
+<p>不过，术语本身并非我们需要重点讨论的内容，我们在这里把重点放在事件循环的原理上。在底层的 C/C++ 代码中，这个事件循环是一个跑在独立线程中的循环，我们用伪代码来表示，大概是这样的:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(TRUE) &#123;</span><br><span class="line">    r = wait();</span><br><span class="line">    execute(r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们可以看到，整个循环做的事情基本上就是反复“等待 - 执行”。当然，实际的代码中并没有这么简单，还有要判断循环是否结束、宏观任务队列等逻辑，这里为了方便你理解，我就把这些都省略掉了。</p>
+<p>这里每次的执行过程，其实都是一个宏观任务。我们可以大概理解: 宏观任务的队列就相当于事件循环。</p>
+<p>在宏观任务中，JavaScript 的 Promise 还会产生异步代码，JavaScript 必须保证这些异步代码在一个宏观任务中完成，因此，每个宏观任务中又包含了一个微观任务队列:</p>
+<p><img src="/archives/front-end/JavaScript/1555988415/event-loop.jpg" alt="event-loop"></p>
+<p>有了宏观任务和微观任务机制，我们就可以实现 JS 引擎级和宿主级的任务了，例如: Promise 永远在队列尾部添加微观任务。setTimeout 等宿主 API，则会添加宏观任务。</p>
+<h4 id="a-href-https-jakearchibald-com-2015-tasks-microtasks-queues-and-schedules-wei-ren-wu-de-zhi-xing-a"><a class="header-anchor" href="#微任务的执行"></a><span class="exturl" data-url="aHR0cHM6Ly9qYWtlYXJjaGliYWxkLmNvbS8yMDE1L3Rhc2tzLW1pY3JvdGFza3MtcXVldWVzLWFuZC1zY2hlZHVsZXMv" title="https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/">微任务的执行<i class="fa fa-external-link"></i></span></h4>
+<h5 id="promise"><a class="header-anchor" href="#promise"></a>Promise</h5>
+<p>Promise 是 JavaScript 语言提供的一种标准化的异步管理方式，它的总体思想是，需要进行 io、等待或者其它异步操作的函数，不返回真实结果，而返回一个“承诺”，函数的调用方可以在合适的时机，选择等待这个承诺兑现（通过 Promise 的 then 方法的回调）。</p>
+<blockquote>
+<p>Promise 产生的是 JavaScript 引擎内部的微任务，而 setTimeout 是浏览器 API，它产生宏任务。</p>
+</blockquote>
+<h5 id="async-await"><a class="header-anchor" href="#async-await"></a>async/await</h5>
+<p>async/await 是 ES2016 新加入的特性，它提供了用 for、if 等代码结构来编写异步的方式。它的运行时基础是 Promise，面对这种比较新的特性，我们先来看一下基本用法。</p>
+<p>async 函数必定返回 Promise，我们把所有返回 Promise 的函数都可以认为是异步函数。</p>
+<p>async 函数是一种特殊语法，特征是在 function 关键字之前加上 async 关键字，这样，就定义了一个 async 函数，我们可以在其中使用 await 来等待一个 Promise。</p>
+<blockquote>
+<p>generator/iterator 也常常被跟异步一起来讲，我们必须说明 generator/iterator 并非异步代码，只是在缺少 async/await 的时候，一些框架（最著名的要数 co）使用这样的特性来模拟 async/await。</p>
+<p>但是 generator 并非被设计成实现异步，所以有了 async/await 之后，generator/iterator 来模拟异步的方法应该被废弃。</p>
+</blockquote>
+<h4 id="han-shu-de-zhi-xing"><a class="header-anchor" href="#函数的执行"></a>函数的执行</h4>
+<ul>
+<li>闭包: closure
+<ul>
+<li>环境部分
+<ul>
+<li>环境
+<ul>
+<li>变量环境</li>
+<li>词法环境</li>
+</ul>
+</li>
+<li>标识符列表</li>
+</ul>
+</li>
+<li>λ 表达式</li>
+</ul>
+</li>
+<li>JavaScript 函数
+<ul>
+<li>环境部分
+<ul>
+<li>词法作用域: 执行上下文的一部分
+<ul>
+<li>scope</li>
+<li>this 值</li>
+</ul>
+</li>
+<li>函数里面不带 var/let/const 的变量</li>
+</ul>
+</li>
+<li>函数</li>
+</ul>
+</li>
+</ul>
+<h5 id="bi-bao"><a class="header-anchor" href="#闭包"></a>闭包</h5>
+<ol>
+<li>编译原理中，它是处理语法产生式的一个步骤</li>
+<li>计算几何中，它表示包裹平面点集的凸多边形（翻译作凸包）</li>
+<li>而在编程语言领域，它表示一种函数</li>
+</ol>
+<p>闭包这个概念第一次出现在 1964 年的《The Computer Journal》上，由 P. J. Landin 在《The mechanical evaluation of expressions》一文中提出了 applicative expression 和 closure 的概念。</p>
+<p><img src="/archives/front-end/JavaScript/1555988415/The-mechanical-evaluation-of-expressions.png" alt="the-mechanical-evaluation-of-expressions"></p>
+<p>在上世纪 60 年代，主流的编程语言是基于 lambda 演算的函数式编程语言，所以这个最初的闭包定义，使用了大量的函数式术语。一个不太精确的描述是“带有一系列信息的 λ 表达式”。对函数式语言而言，λ 表达式其实就是函数。</p>
+<p>我们可以这样简单理解一下，闭包其实只是一个绑定了执行环境的函数，这个函数并不是印在书本里的一条简单的表达式，<em>闭包与普通函数的区别是，它携带了执行的环境，就像人在外星中需要自带吸氧的装备一样，这个函数也带有在程序中生存的环境</em>。</p>
+<p>这个古典的闭包定义中，闭包包含两个部分。</p>
+<ul>
+<li>环境部分
+<ul>
+<li>环境</li>
+<li>标识符列表</li>
+</ul>
+</li>
+<li>表达式部分</li>
+</ul>
+<p>当我们把视角放在 JavaScript 的标准中，我们发现，标准中并没有出现过 closure 这个术语，但是，我们却不难根据古典定义，在 JavaScript 中找到对应的闭包组成部分。</p>
+<ul>
+<li>环境部分
+<ul>
+<li>环境: 函数的词法环境（执行上下文的一部分）</li>
+<li>标识符列表: 函数中用到的未声明的变量</li>
+</ul>
+</li>
+<li>表达式部分: 函数体</li>
+</ul>
+<p>至此，我们可以认为，JavaScript 中的函数完全符合闭包的定义。它的环境部分是函数词法环境部分组成，它的标识符列表是函数中用到的未声明变量，它的表达式部分就是函数体。</p>
+<p>这里我们容易产生一个常见的概念误区，有些人会把 JavaScript 执行上下文，或者作用域（Scope，ES3 中规定的执行上下文的一部分）这个概念当作闭包。</p>
+<p>实际上 JavaScript 中跟闭包对应的概念就是“函数”，可能是这个概念太过于普通，跟闭包看起来又没什么联系，所以大家才不自觉地把这个概念对应到了看起来更特别的“作用域”吧。</p>
+<h5 id="zhi-xing-shang-xia-wen-zhi-xing-de-ji-chu-she-shi"><a class="header-anchor" href="#执行上下文-执行的基础设施"></a>执行上下文: 执行的基础设施</h5>
+<p>相比普通函数，JavaScript 函数的主要复杂性来自于它携带的“环境部分”。当然，发展到今天的 JavaScript，它所定义的环境部分，已经比当初经典的定义复杂了很多。</p>
+<p>JavaScript 中与闭包“环境部分”相对应的术语是“词法环境”，但是 JavaScript 函数比 λ 函数要复杂得多，我们还要处理 this、变量声明、with 等等一系列的复杂语法，λ 函数中可没有这些东西，所以，在 JavaScript 的设计中，词法环境只是 JavaScript 执行上下文的一部分。</p>
+<p>JavaScript 标准把一段代码（包括函数），执行所需的所有信息定义为: “执行上下文”。</p>
+<ul>
+<li><strong>执行上下文在 ES3 中</strong>，包含三个部分。
+<ul>
+<li>scope: 作用域，也常常被叫做作用域链。</li>
+<li>variable object: 变量对象，用于存储变量的对象。</li>
+<li>this value: this 值。</li>
+</ul>
+</li>
+<li><strong>在 ES5 中</strong>，我们改进了命名方式，把执行上下文最初的三个部分改为下面这个样子。
+<ul>
+<li>lexical environment: 词法环境，当获取变量时使用。</li>
+<li>variable environment: 变量环境，当声明变量时使用。</li>
+<li>this value: this 值。</li>
+</ul>
+</li>
+<li><strong>在 ES2018 中</strong>，执行上下文又变成了这个样子，this 值被归入 lexical environment，但是增加了不少内容。
+<ul>
+<li>lexical environment: 词法环境，当获取变量或者 this 值时使用。</li>
+<li>variable environment: 变量环境，当声明变量时使用</li>
+<li>code evaluation state: 用于恢复代码执行位置。</li>
+<li>Function: 执行的任务是函数时使用，表示正在被执行的函数。</li>
+<li>ScriptOrModule: 执行的任务是脚本或者模块时使用，表示正在被执行的代码。</li>
+<li>Realm: 使用的基础库和内置对象实例。</li>
+<li>Generator: 仅生成器上下文有这个属性，表示当前生成器。</li>
+</ul>
+</li>
+</ul>
+<h5 id="realm"><a class="header-anchor" href="#realm"></a>Realm</h5>
+<p>在最新的标准（9.0）中，JavaScript 引入了一个新概念 Realm，它的中文意思是“国度”“领域”“范围”。在 ES2016 之前的版本中，标准中甚少提及{}的原型问题。但在实际的前端开发中，通过 iframe 等方式创建多 window 环境并非罕见的操作，所以，这才促成了新概念 Realm 的引入。</p>
+<p>Realm 中包含一组完整的内置对象，而且是复制关系。</p>
+<p>对不同 Realm 中的对象操作，会有一些需要格外注意的问题，比如 typeof、instanceOf 几乎是失效的。</p>
+<p>以下代码展示了在浏览器环境中获取来自两个 Realm 的对象，它们跟本土的 Object 做 instanceOf 时会产生差异:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">'iframe'</span>)</span><br><span class="line"><span class="built_in">document</span>.documentElement.appendChild(iframe)</span><br><span class="line">iframe.src=<span class="string">"javascript:var b = &#123;&#125;;"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b1 = iframe.contentWindow.b;</span><br><span class="line"><span class="keyword">var</span> b2 = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b1, <span class="keyword">typeof</span> b2); <span class="comment">//undefined object</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(b1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>, b2 <span class="keyword">instanceof</span> <span class="built_in">Object</span>); <span class="comment">//false true</span></span><br></pre></td></tr></table></figure>
+<h5 id="han-shu-de-chong-lei"><a class="header-anchor" href="#函数的种类"></a>函数的种类</h5>
+<ul>
+<li>
+<p>普通函数: 用 function 关键字定义的函数</p>
+</li>
+<li>
+<p>箭头函数: 用 =&gt; 运算符定义的函数</p>
+</li>
+<li>
+<p>方法: 在 class 中定义的函数</p>
+</li>
+<li>
+<p>生成器函数: 用 function * 定义的函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>类: 用 class 定义的类，实际上也是函数</p>
+</li>
+<li>
+<p>异步函数: 普通函数、箭头函数和生成器函数加上 async 关键字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// code</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> foo = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="comment">// code</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">foo</span>*(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// code</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="this-guan-jian-zi-de-xing-wei"><a class="header-anchor" href="#this-关键字的行为"></a>this 关键字的行为</h5>
+<p>this 是 JavaScript 中的一个关键字，它的使用方法类似于一个变量（但是 this 跟变量的行为有很多不同，上一节课我们讲了一些普通变量的行为和机制，也就是 var 声明和赋值、let 的内容）。</p>
+<p>this 是执行上下文中很重要的一个组成部分。同一个函数调用方式不同，得到的 this 值也不同。</p>
+<ul>
+<li>调用函数时使用的引用，决定了函数执行时刻的 this 值。</li>
+<li>箭头函数的调用方式，不会影响它的 this 值。
+<blockquote>
+<p>生成器函数、异步生成器函数和异步普通函数跟普通函数行为是一致的，异步箭头函数与箭头函数行为是一致的。</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="this-guan-jian-zi-de-ji-zhi"><a class="header-anchor" href="#this-关键字的机制"></a>this 关键字的机制</h5>
+<p>函数能够引用定义时的变量，如上文分析，函数也能记住定义时的 this，因此，函数内部必定有一个机制来保存这些信息。</p>
+<p>在 JavaScript 标准中，为函数规定了用来保存定义时上下文的私有属性 [[Environment]]。</p>
+<p>当一个函数执行时，会创建一条新的执行环境记录，记录的外层词法环境（outer lexical environment）会被设置成函数的 [[Environment]]。</p>
+<p>这个动作就是切换上下文了，我们假设有这样的代码:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">foo();</span><br><span class="line"></span><br><span class="line">在别处定义了 foo:</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(b); <span class="comment">// 2</span></span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// error</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的 foo 能够访问 b（定义时词法环境），却不能访问 a（执行时的词法环境），这就是执行上下文的切换机制了。</p>
+<p>JavaScript 用一个栈来管理执行上下文，这个栈中的每一项又包含一个链表。如下图所示:</p>
+<p><img src="/archives/front-end/JavaScript/1555988415/JavaScript-execution-stack.jpg" alt="javascript-execution-stack"></p>
+<p>当函数调用时，会入栈一个新的执行上下文，函数调用结束时，执行上下文被出栈。</p>
+<p>而 this 则是一个更为复杂的机制，JavaScript 标准定义了 [[thisMode]] 私有属性。</p>
+<p>[[thisMode]] 私有属性有三个取值。</p>
+<p>lexical: 表示从上下文中找 this，这对应了箭头函数。<br>
+global: 表示当 this 为 undefined 时，取全局对象，对应了普通函数。<br>
+strict: 当严格模式时使用，this 严格按照调用时传入的值，可能为 null 或者 undefined。<br>
+非常有意思的是，方法的行为跟普通函数有差异，恰恰是因为 class 设计成了默认按 strict 模式执行。</p>
+<p>我们可以用 strict 达成与上一节中方法的例子一样的效果:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showThis</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  showThis: showThis,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">showThis(); <span class="comment">// undefined</span></span><br><span class="line">o.showThis(); <span class="comment">// o</span></span><br></pre></td></tr></table></figure>
+<p>函数创建新的执行上下文中的词法环境记录时，会根据 [[thisMode]] 来标记新纪录的 [[ThisBindingStatus]] 私有属性。</p>
+<p>代码执行遇到 this 时，会逐层检查当前词法环境记录中的 [[ThisBindingStatus]]，当找到有 this 的环境记录时获取 this 的值。</p>
+<p>这样的规则的实际效果是，嵌套的箭头函数中的代码都指向外层 this，例如:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line">o.foo = <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">o.foo()()(); <span class="comment">// o, o, o</span></span><br></pre></td></tr></table></figure>
+<p>这个例子中，我们定义了三层嵌套的函数，最外层为普通函数，两层都是箭头函数。</p>
+<p>这里调用三个函数，获得的 this 值是一致的，都是对象 o。</p>
+<h5 id="cao-zuo-this-de-nei-zhi-han-shu"><a class="header-anchor" href="#操作-this-的内置函数"></a>操作 this 的内置函数</h5>
+<p>Function.prototype.call 和 Function.prototype.apply 可以指定函数调用时传入的 this 值，示例如下:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(a, b, c);</span><br><span class="line">&#125;</span><br><span class="line">foo.call(&#123;&#125;, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">foo.apply(&#123;&#125;, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</span><br></pre></td></tr></table></figure>
+<p>这里 call 和 apply 作用是一样的，只是传参方式有区别。</p>
+<p>此外，还有 Function.prototype.bind 它可以生成一个绑定过的函数，这个函数的 this 值固定了参数:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(a, b, c);</span><br><span class="line">&#125;</span><br><span class="line">foo.bind(&#123;&#125;, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)();</span><br></pre></td></tr></table></figure>
+<p>有趣的是，call、bind 和 apply 用于不接受 this 的函数类型如箭头、class 都不会报错。</p>
+<p>这时候，它们无法实现改变 this 的能力，但是可以实现传参。</p>
+<h5 id="new-yu-this"><a class="header-anchor" href="#new-与-this"></a>new 与 this</h5>
+<ol>
+<li>
+<p>new 的执行过程</p>
+<ul>
+<li>以构造器的 prototype 属性（注意与私有字段 [[prototype]] 的区分）为原型，创建新对象；</li>
+<li>将 this 和调用参数传给构造器，执行；</li>
+<li>如果构造器返回的是对象，则返回，否则返回第一步创建的对象。</li>
+</ul>
+</li>
+<li>
+<p>new 和函数的对应关系</p>
+<blockquote>
+<p>仅普通函数和类能够跟 new 搭配使用</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>函数类型</th>
+<th>new</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>普通函数</td>
+<td>新对象</td>
+</tr>
+<tr>
+<td>箭头函数</td>
+<td>报错</td>
+</tr>
+<tr>
+<td>方法</td>
+<td>报错</td>
+</tr>
+<tr>
+<td>生成器</td>
+<td>报错</td>
+</tr>
+<tr>
+<td>类</td>
+<td>新对象</td>
+</tr>
+<tr>
+<td>异步普通函数</td>
+<td>报错</td>
+</tr>
+<tr>
+<td>异步箭头函数</td>
+<td>报错</td>
+</tr>
+<tr>
+<td>异步生成器函数</td>
+<td>报错</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h4 id="yu-ju-ji-de-zhi-xing"><a class="header-anchor" href="#语句级的执行"></a>语句级的执行</h4>
+<blockquote>
+<p>JavaScript 语句执行机制涉及的一种基础类型: Completion 类型</p>
+</blockquote>
+<p>JavaScript 语句执行的完成状态，我们用一个标准类型来表示: Completion Record</p>
+<p>Completion Record 表示一个语句执行完之后的结果，它有三个字段:</p>
+<ul>
+<li>[[type]] 表示完成的类型，有 break continue return throw 和 normal 几种类型；</li>
+<li>[[value]] 表示语句的返回值，如果语句没有，则是 empty；</li>
+<li>[[target]] 表示语句的目标，通常是一个 JavaScript 标签（标签在后文会有介绍）。</li>
+</ul>
+<p>JavaScript 正是依靠语句的 Completion Record 类型，方才可以在语句的复杂嵌套结构中，实现各种控制。</p>
+<h5 id="pu-tong-yu-ju"><a class="header-anchor" href="#普通语句"></a>普通语句</h5>
+<ul>
+<li>声明类语句
+<ul>
+<li>
+<p>var 声明</p>
+<blockquote>
+<p>在只有 var，没有 let 的旧 JavaScript 时代，诞生了一个技巧，叫做: 立即执行的函数表达式（IIFE），通过创建一个函数，并且立即执行，来构造一个新的域，从而控制 var 的范围。</p>
+<p>由于语法规定了 function 关键字开头是函数声明，所以要想让函数变成函数表达式，我们必须得加点东西，最常见的做法是加括号。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&gt;   <span class="keyword">var</span> a;</span><br><span class="line">&gt;   <span class="comment">//code</span></span><br><span class="line">&gt; &#125;());</span><br><span class="line">&gt;</span><br><span class="line">&gt; (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&gt;   <span class="keyword">var</span> a;</span><br><span class="line">&gt;   <span class="comment">//code</span></span><br><span class="line">&gt; &#125;)();</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>但是，括号有个缺点，那就是如果上一行代码不写分号，括号会被解释为上一行代码最末的函数调用，产生完全不符合预期，并且难以调试的行为，加号等运算符也有类似的问题。所以一些推荐不加分号的代码风格规范，会要求在括号前面加上分号。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt; ;(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&gt;   <span class="keyword">var</span> a;</span><br><span class="line">&gt;   <span class="comment">//code</span></span><br><span class="line">&gt; &#125;())</span><br><span class="line">&gt;</span><br><span class="line">&gt; ;(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&gt;   <span class="keyword">var</span> a;</span><br><span class="line">&gt;   <span class="comment">//code</span></span><br><span class="line">&gt; &#125;)()</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>我比较推荐的写法是使用 void 关键字。也就是下面的这种形式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&gt;   <span class="keyword">var</span> a;</span><br><span class="line">&gt;   <span class="comment">//code</span></span><br><span class="line">&gt; &#125;();</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>这有效避免了语法问题，同时，语义上 void 运算表示忽略后面表达式的值，变成 undefined，我们确实不关心 IIFE 的返回值，所以语义也更为合理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">var</span> b;</span><br><span class="line">&gt; <span class="keyword">void</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">&gt;     <span class="keyword">var</span> env = &#123;<span class="attr">b</span>:<span class="number">1</span>&#125;;</span><br><span class="line">&gt;     b = <span class="number">2</span>;</span><br><span class="line">&gt;     <span class="built_in">console</span>.log(<span class="string">"In function b:"</span>, b);</span><br><span class="line">&gt;     <span class="keyword">with</span>(env) &#123;</span><br><span class="line">&gt;         <span class="keyword">var</span> b = <span class="number">3</span>;</span><br><span class="line">&gt;         <span class="built_in">console</span>.log(<span class="string">"In with b:"</span>, b);</span><br><span class="line">&gt;     &#125;</span><br><span class="line">&gt; &#125;();</span><br><span class="line">&gt; <span class="built_in">console</span>.log(<span class="string">"Global b:"</span>, b);</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote></blockquote>
+</li>
+<li>
+<p>const 声明</p>
+</li>
+<li>
+<p>let 声明</p>
+<blockquote>
+<p>let 是 ES6 开始引入的新的变量声明模式，比起 var 的诸多弊病，let 做了非常明确的梳理和规定。</p>
+<p>为了实现 let，JavaScript 在运行时引入了块级作用域。也就是说，在 let 出现之前，JavaScript 的 if for 等语句皆不产生作用域。</p>
+</blockquote>
+</li>
+<li>
+<p>函数声明</p>
+</li>
+<li>
+<p>类声明</p>
+</li>
+</ul>
+</li>
+<li>表达式语句</li>
+<li>空语句</li>
+<li>with 语句</li>
+<li>debugger 语句</li>
+</ul>
+<p>普通语句执行后，会得到 [[type]] 为 normal 的 Completion Record，JavaScript 引擎遇到这样的 Completion Record，会继续执行下一条语句。</p>
+<p>这些语句中，只有表达式语句会产生 [[value]]，当然，从引擎控制的角度，这个 value 并没有什么用处。</p>
+<p>如果你经常使用 chrome 自带的调试工具，可以知道，输入一个表达式，在控制台可以得到结果，但是在前面加上 var，就变成了 undefined。</p>
+<p><img src="/archives/front-end/JavaScript/1555988415/chrome-console-sentence-execution.png" alt="chrome-console-sentence-execution"></p>
+<p>Chrome 控制台显示的正是语句的 Completion Record 的 [[value]]。</p>
+<h5 id="yu-ju-kuai"><a class="header-anchor" href="#语句块"></a>语句块</h5>
+<blockquote>
+<p>大括号括起来的一组语句，它是一种语句的复合结构，可以嵌套。</p>
+</blockquote>
+<p>语句块本身并不复杂，我们需要注意的是语句块内部的语句的 Completion Record 的 [[type]] 如果不为 normal，会打断语句块后续的语句执行。</p>
+<p>比如我们考虑，一个 [[type]] 为 return 的语句，出现在一个语句块中的情况。</p>
+<p>从语句的这个 type 中，我们大概可以猜到它由哪些特定语句产生，我们就来说说最开始的例子中的 return。</p>
+<p>return 语句可能产生 return 或者 throw 类型的 Completion Record。我们来看一个例子。</p>
+<p>先给出一个内部为普通语句的语句块:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">1</span>; <span class="comment">// normal, empty, empty</span></span><br><span class="line">  i++; <span class="comment">// normal, 1, empty</span></span><br><span class="line">  <span class="built_in">console</span>.log(i); <span class="comment">//normal, undefined, empty</span></span><br><span class="line">&#125; <span class="comment">// normal, undefined, empty</span></span><br></pre></td></tr></table></figure>
+<p>在每一行的注释中，都给出了语句的 Completion Record 值。</p>
+<p>我们看到，在一个 block 中，如果每一个语句都是 normal 类型，那么它会顺次执行。接下来我们加入 return 试试看。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">1</span>; <span class="comment">// normal, empty, empty</span></span><br><span class="line">  <span class="keyword">return</span> i; <span class="comment">// return, 1, empty</span></span><br><span class="line">  i++;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125; <span class="comment">// return, 1, empty</span></span><br></pre></td></tr></table></figure>
+<p>但是假如我们在 block 中插入了一条 return 语句，产生了一个非 normal 记录，那么整个 block 会成为非 normal。这个结构就保证了非 normal 的完成类型可以穿透复杂的语句嵌套结构，产生控制效果。</p>
+<h5 id="kong-zhi-xing-yu-ju"><a class="header-anchor" href="#控制型语句"></a>控制型语句</h5>
+<ul>
+<li>if</li>
+<li>switch</li>
+<li>for
+<ul>
+<li>for</li>
+<li>for…of</li>
+<li>for-await-of</li>
+<li>for…in</li>
+</ul>
+</li>
+<li>while
+<ul>
+<li>while</li>
+<li>do-while</li>
+</ul>
+</li>
+<li>continue</li>
+<li>break</li>
+<li>return</li>
+<li>throw</li>
+<li>try</li>
+</ul>
+<p>控制型语句带有 if、switch 关键字，它们会对不同类型的 Completion Record 产生反应。</p>
+<p>控制类语句分成两部分，一类是对其内部造成影响，如 if、switch、while/for、try。另一类是对外部造成影响如 break、continue、return、throw，这两类语句的配合，会产生控制代码执行顺序和执行逻辑的效果，这也是我们编程的主要工作。</p>
+<p>一般来说， for/while - break/continue 和 try - throw 这样比较符合逻辑的组合，是大家比较熟悉的，但是，实际上，我们需要控制语句跟 break 、continue 、return 、throw 四种类型与控制语句两两组合产生的效果。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">break</th>
+<th style="text-align:center">continue</th>
+<th style="text-align:center">return</th>
+<th style="text-align:center">throw</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">if</td>
+<td style="text-align:center">穿透</td>
+<td style="text-align:center">穿透</td>
+<td style="text-align:center">穿透</td>
+<td style="text-align:center">穿透</td>
+</tr>
+<tr>
+<td style="text-align:center">switch</td>
+<td style="text-align:center">消费</td>
+<td style="text-align:center">穿透</td>
+<td style="text-align:center">穿透</td>
+<td style="text-align:center">穿透</td>
+</tr>
+<tr>
+<td style="text-align:center">for/while</td>
+<td style="text-align:center">消费</td>
+<td style="text-align:center">消费</td>
+<td style="text-align:center">穿透</td>
+<td style="text-align:center">穿透</td>
+</tr>
+<tr>
+<td style="text-align:center">function</td>
+<td style="text-align:center">报错</td>
+<td style="text-align:center">报错</td>
+<td style="text-align:center">消费</td>
+<td style="text-align:center">穿透</td>
+</tr>
+<tr>
+<td style="text-align:center">try</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">消费</td>
+</tr>
+<tr>
+<td style="text-align:center">catch</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">穿透</td>
+</tr>
+<tr>
+<td style="text-align:center">finally</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">特殊处理</td>
+<td style="text-align:center">穿透</td>
+</tr>
+</tbody>
+</table>
+<p>因为 finally 中的内容必须保证执行，所以 try/catch 执行完毕，即使得到的结果是非 normal 型的完成记录，也必须要执行 finally。</p>
+<p>而当 finally 执行也得到了非 normal 记录，则会使 finally 中的记录作为整个 try 结构的结果。</p>
+<h5 id="dai-biao-qian-de-yu-ju"><a class="header-anchor" href="#带标签的语句"></a>带标签的语句</h5>
+<p>任何 JavaScript 语句是可以加标签的，在语句前加冒号即可。</p>
+<p>大部分时候，这个东西类似于注释，没有任何用处。唯一有作用的时候是: 与完成记录类型中的 target 相配合，用于跳出多层循环。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">outer: <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">  inner: <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">break</span> outer;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'finished'</span>);</span><br></pre></td></tr></table></figure>
+<p>break/continue 语句如果后跟了关键字，会产生带 target 的完成记录。一旦完成记录带了 target，那么只有拥有对应 label 的循环语句会消费它。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>ZakaryCode</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://zakarycode.github.io/archives/front-end/JavaScript/1555988415.html" title="JavaScript 整理">https://zakarycode.github.io/archives/front-end/JavaScript/1555988415.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/record/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/Relearning-front-end/" rel="tag"># 重学前端</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/ECMAScript/" rel="tag"># ECMAScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/front-end/CSS/1555987337.html" rel="next" title="CSS 整理">
+                <i class="fa fa-chevron-left"></i> CSS 整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/front-end/Engineering-Practice/1555988596.html" rel="prev" title="前端工程实践">
+                前端工程实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/Z.png" alt="ZakaryCode">
+            
+              <p class="site-author-name" itemprop="name">ZakaryCode</p>
+              <p class="site-description motion-element" itemprop="description">日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90Lm1lL1pha2FyeUNvZGU=" title="Telegram &rarr; https://t.me/ZakaryCode"><i class="fa fa-fw fa-telegram"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9wbHVzLmdvb2dsZS5jb20vMTA3NzcwNDA4OTQ5MDgzMzU5NTgz" title="Google &rarr; https://plus.google.com/107770408949083359583"><i class="fa fa-fw fa-google"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aYWthcnlDb2Rl" title="Twitter &rarr; https://twitter.com/ZakaryCode"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tLzEwMDAxNDk1MzUzODEwMg==" title="FB Page &rarr; https://www.facebook.com/100014953538102"><i class="fa fa-fw fa-facebook"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpha2FyeWNvZGVAZ21haWwuY29t" title="E-Mail &rarr; mailto:zakarycode@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#yu-yi"><span class="nav-number">1.</span> <span class="nav-text">语义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wen-fa"><span class="nav-number">2.</span> <span class="nav-text">文法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ci-fa"><span class="nav-number">2.1.</span> <span class="nav-text">词法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yu-fa"><span class="nav-number">2.2.</span> <span class="nav-text">语法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yun-xing-shi"><span class="nav-number">3.</span> <span class="nav-text">运行时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#a-href-https-developer-mozilla-org-en-us-docs-web-java-script-data-structures-shu-ju-jie-gou-a"><span class="nav-number">3.1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lei-xing"><span class="nav-number">3.1.1.</span> <span class="nav-text">类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#a-href-https-developer-mozilla-org-en-us-docs-web-java-script-data-structures-objects-object-dui-xiang-a"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">Object 对象</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#a-href-https-developer-mozilla-org-en-us-docs-web-java-script-data-structures-properties-properties-shu-xing-a"><span class="nav-number">3.1.1.1.1.</span> <span class="nav-text">Properties 属性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shi-li"><span class="nav-number">3.1.2.</span> <span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ying-yong-he-ji-zhi"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">应用和机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zhi-xing-guo-cheng-suan-fa"><span class="nav-number">3.2.</span> <span class="nav-text">执行过程(算法)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#shi-jian-xun-huan"><span class="nav-number">3.2.1.</span> <span class="nav-text">事件循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#a-href-https-jakearchibald-com-2015-tasks-microtasks-queues-and-schedules-wei-ren-wu-de-zhi-xing-a"><span class="nav-number">3.2.2.</span> <span class="nav-text">微任务的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#promise"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">Promise</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#async-await"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">async/await</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#han-shu-de-zhi-xing"><span class="nav-number">3.2.3.</span> <span class="nav-text">函数的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#bi-bao"><span class="nav-number">3.2.3.1.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#zhi-xing-shang-xia-wen-zhi-xing-de-ji-chu-she-shi"><span class="nav-number">3.2.3.2.</span> <span class="nav-text">执行上下文: 执行的基础设施</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#realm"><span class="nav-number">3.2.3.3.</span> <span class="nav-text">Realm</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#han-shu-de-chong-lei"><span class="nav-number">3.2.3.4.</span> <span class="nav-text">函数的种类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#this-guan-jian-zi-de-xing-wei"><span class="nav-number">3.2.3.5.</span> <span class="nav-text">this 关键字的行为</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#this-guan-jian-zi-de-ji-zhi"><span class="nav-number">3.2.3.6.</span> <span class="nav-text">this 关键字的机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cao-zuo-this-de-nei-zhi-han-shu"><span class="nav-number">3.2.3.7.</span> <span class="nav-text">操作 this 的内置函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#new-yu-this"><span class="nav-number">3.2.3.8.</span> <span class="nav-text">new 与 this</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yu-ju-ji-de-zhi-xing"><span class="nav-number">3.2.4.</span> <span class="nav-text">语句级的执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#pu-tong-yu-ju"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">普通语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#yu-ju-kuai"><span class="nav-number">3.2.4.2.</span> <span class="nav-text">语句块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#kong-zhi-xing-yu-ju"><span class="nav-number">3.2.4.3.</span> <span class="nav-text">控制型语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dai-biao-qian-de-yu-ju"><span class="nav-number">3.2.4.4.</span> <span class="nav-text">带标签的语句</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu"> </span>&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-bolt"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zakary Zhu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://zakarycode.disqus.com/count.js" async></script>
+  
+
+  
+    <script>
+      var disqus_config = function () {
+        this.page.url = "https://zakarycode.github.io/archives/front-end/JavaScript/1555988415.html";
+        this.page.identifier = "archives/front-end/JavaScript/1555988415.html";
+        this.page.title = 'JavaScript 整理';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zakarycode.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        $(function () {
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          if (offsetTop <= 0) {
+            // load directly when there's no a scrollbar
+            loadComments();
+          } else {
+            $(window).on('scroll.disqus_scroll', function () {
+              // offsetTop may changes because of manually resizing browser window or lazy loading images.
+              var offsetTop = $('#comments').offset().top - $(window).height();
+              var scrollTop = $(window).scrollTop();
+
+              // pre-load comments a bit? (margin or anything else)
+              if (offsetTop - scrollTop < 60) {
+                $(window).off('.disqus_scroll');
+                loadComments();
+              }
+            });
+          }
+        });
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('manual', "#more");
+  
+  </script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>

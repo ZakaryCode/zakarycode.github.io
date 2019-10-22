@@ -1,0 +1,52 @@
+@startuml 传统开发
+top to bottom direction
+skinparam handwritten true
+skinparam packageStyle cloud node rectangle actor
+skinparam CloudBackgroundColor PaleGreen
+skinparam ArrowColor black
+skinparam FontName Source Han Serif
+skinparam actor {
+  BackgroundColor LightSkyBlue
+  BorderColor LightSlateGray
+}
+cloud "SVN/GIT" as code
+actor 开发 as dev
+actor 测试 as test
+actor 运维 as Ops
+node 本地环境 as localS
+node 开发环境 as testS
+node 生产环境 as productS
+
+code <-- dev: 开发代码，测试OK\npush到代码云端
+dev --> localS
+code --> test: 开发代码跑不起来
+code <-- test
+test --> testS
+code --> Ops: 生产环境与测试环境\n不一样，需要重新部署
+Ops --> productS
+@enduml
+
+@startuml Docker环境开发
+top to bottom direction
+skinparam handwritten true
+skinparam packageStyle cloud node rectangle actor
+skinparam CloudBackgroundColor PaleGreen
+skinparam ArrowColor black
+skinparam FontName Source Han Serif
+skinparam actor {
+  BackgroundColor LightSkyBlue
+  BorderColor LightSlateGray
+}
+actor 项目构架师 as arch
+actor 开发部门 as dev
+actor 测试部门 as test
+actor 运维部门 as Ops
+node service [
+  Docker镜像
+]
+
+arch -> service
+service <--> dev
+service <--> test
+service <--> Ops
+@enduml

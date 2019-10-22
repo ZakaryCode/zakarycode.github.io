@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CH,zh-cn,en,default">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=6.6.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-z.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-z.png?v=6.6.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <meta name="description" content="同样也是按照语言和功能来划分，语言部分从大到小有各种语法结构，比如@rule、选择器、单位等等；功能的部分大致可以分为布局、绘制和交互类。 在布局类我们常用的布局有: 正常流和弹性布局；绘制类则分成图形相关和文字相关的绘制；最后则是动画和其他的交互。">
+<meta name="keywords" content="笔记,重学前端,CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS 整理">
+<meta property="og:url" content="https://zakarycode.github.io/archives/front-end/CSS/1555987337.html">
+<meta property="og:site_name" content="Zakary Zhu&#39;s Blog">
+<meta property="og:description" content="同样也是按照语言和功能来划分，语言部分从大到小有各种语法结构，比如@rule、选择器、单位等等；功能的部分大致可以分为布局、绘制和交互类。 在布局类我们常用的布局有: 正常流和弹性布局；绘制类则分成图形相关和文字相关的绘制；最后则是动画和其他的交互。">
+<meta property="og:locale" content="zh-CH">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/CSS/1555987337/CSS%E9%80%89%E6%8B%A9%E5%99%A8%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
+<meta property="og:updated_time" content="2019-04-23T02:42:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS 整理">
+<meta name="twitter:description" content="同样也是按照语言和功能来划分，语言部分从大到小有各种语法结构，比如@rule、选择器、单位等等；功能的部分大致可以分为布局、绘制和交互类。 在布局类我们常用的布局有: 正常流和弹性布局；绘制类则分成图形相关和文字相关的绘制；最后则是动画和其他的交互。">
+<meta name="twitter:image" content="https://zakarycode.github.io/archives/front-end/CSS/1555987337/CSS%E9%80%89%E6%8B%A9%E5%99%A8%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B%E5%9B%BE.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zakary Zhu's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://zakarycode.github.io/archives/front-end/CSS/1555987337.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CSS 整理 | Zakary Zhu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CH">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zakary Zhu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Try to find the way about self-improvement.</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL1pha2FyeUNvZGU=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zakarycode.github.io/archives/front-end/CSS/1555987337.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZakaryCode">
+      <meta itemprop="description" content="日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。">
+      <meta itemprop="image" content="/images/Z.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zakary Zhu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">CSS 整理
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-04-23 10:42:17" itemprop="dateCreated datePublished" datetime="2019-04-23T10:42:17+08:00">2019-04-23</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/front-end/CSS/1555987337.html#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="archives/front-end/CSS/1555987337.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>同样也是按照语言和功能来划分，语言部分从大到小有各种语法结构，比如@rule、选择器、单位等等；功能的部分大致可以分为布局、绘制和交互类。</p>
+<p>在布局类我们常用的布局有: 正常流和弹性布局；绘制类则分成图形相关和文字相关的绘制；最后则是动画和其他的交互。</p>
+<a id="more"></a>
+<h2 id="yu-fa"><a class="header-anchor" href="#语法"></a>语法</h2>
+<h3 id="rule-gui-ze"><a class="header-anchor" href="#rule-规则"></a>@rule 规则</h3>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy1zeW50YXgtMy8=" title="https://www.w3.org/TR/css-syntax-3/">@charset<i class="fa fa-external-link"></i></span> 用于提示 CSS 文件使用的字符编码方式，它如果被使用，必须出现在最前面。这个规则只在给出语法解析阶段前使用，并不影响页面上的展示效果。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">charset</span> <span class="string">"utf-8"</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy1jYXNjYWRlLTQv" title="https://www.w3.org/TR/css-cascade-4/">@import<i class="fa fa-external-link"></i></span> 用于引入一个 CSS 文件，除了 @charset 规则不会被引入，@import 可以引入另一个文件的全部内容。(支持 supports 和 media query 形式)</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  @<span class="keyword">import</span> <span class="string">"mystyle.css"</span>;</span><br><span class="line">  @<span class="keyword">import</span> url(<span class="string">"mystyle.css"</span>);</span><br><span class="line"><span class="selector-tag">---</span></span><br><span class="line">  @<span class="keyword">import</span> [ &lt;url&gt; | &lt;string&gt; ]</span><br><span class="line">          [ supports( [ &lt;supports-condition&gt; | &lt;declaration&gt; ] ) ]?</span><br><span class="line">          &lt;media-query-list&gt;? ;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2NzczMtY29uZGl0aW9uYWwv" title="https://www.w3.org/TR/css3-conditional/">@media<i class="fa fa-external-link"></i></span> media query 使用的规则，它能够对设备的类型进行一些判断。在 media 的区块内，是普通规则列表。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">media</span> print &#123;</span><br><span class="line">  <span class="selector-tag">body</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">10pt</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy1wYWdlLTMv" title="https://www.w3.org/TR/css-page-3/">@page<i class="fa fa-external-link"></i></span> 用于分页媒体访问网页时的表现设置，页面是一种特殊的盒模型结构，除了页面本身，还可以设置它周围的盒。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">page</span> &#123;</span><br><span class="line">  <span class="attribute">size</span>: <span class="number">8.5in</span> <span class="number">11in</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10%</span>;</span><br><span class="line"></span><br><span class="line">  @top-left &#123;</span><br><span class="line">    content: 'Hamlet';</span><br><span class="line">  &#125;</span><br><span class="line">  @<span class="keyword">top</span>-<span class="keyword">right</span> &#123;</span><br><span class="line">    content: 'Page ' counter(page);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy1jb3VudGVyLXN0eWxlcy0zLw==" title="https://www.w3.org/TR/css-counter-styles-3/">@counter-style<i class="fa fa-external-link"></i></span> 产生一种数据，用于定义列表项的表现。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">counter</span>-<span class="keyword">style</span> triangle &#123;</span><br><span class="line">  <span class="selector-tag">system</span>: <span class="selector-tag">cyclic</span>;</span><br><span class="line">  <span class="selector-tag">symbols</span>: ‣;</span><br><span class="line">  suffix: ' ';</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy1hbmltYXRpb25zLTEv" title="https://www.w3.org/TR/css-animations-1/">@keyframes<i class="fa fa-external-link"></i></span> 产生一种数据，用于定义动画关键帧。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> diagonal-slide &#123;</span><br><span class="line">  <span class="selector-tag">from</span> &#123;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">to</span> &#123;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">100px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">100px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy1mb250cy0zLw==" title="https://www.w3.org/TR/css-fonts-3/">@fontface<i class="fa fa-external-link"></i></span> 用于定义一种字体，icon font 技术就是利用这个特性来实现的。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">font-face</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: Gentium;</span><br><span class="line">  <span class="attribute">src</span>: <span class="built_in">url</span>(http://example.com/fonts/Gentium.woff);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">  <span class="attribute">font-family</span>: Gentium, serif;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2NzczMtY29uZGl0aW9uYWwv" title="https://www.w3.org/TR/css3-conditional/">@supports<i class="fa fa-external-link"></i></span> 检查环境的特性，它与 media 比较类似。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy1uYW1lc3BhY2VzLTMv" title="https://www.w3.org/TR/css-namespaces-3/">@namespace<i class="fa fa-external-link"></i></span> 用于跟 XML 命名空间配合的一个规则，表示内部的 CSS 选择器全都带上特定命名空间。</li>
+<li>@viewport 用于设置视口的一些特性，不过兼容性目前不是很好，多数时候被 html 的 meta 代替。</li>
+<li>其他 (不太推荐)
+<ul>
+<li>@color-profile 是 SVG1.0 引入的 CSS 特性，但是实现状况不怎么好。</li>
+<li>@document 还没讨论清楚，被推迟到了 CSS4 中。</li>
+<li>@font-feature-values 。todo 查一下。</li>
+</ul>
+</li>
+</ul>
+<h3 id="pu-tong-gui-ze"><a class="header-anchor" href="#普通规则"></a>普通规则</h3>
+<blockquote>
+<p>关键词索引: <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQ1NTL1JlZmVyZW5jZSNLZXl3b3JkX2luZGV4" title="https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#Keyword_index">https://developer.mozilla.org/en-US/docs/Web/CSS/Reference#Keyword_index<i class="fa fa-external-link"></i></span></p>
+</blockquote>
+<h4 id="a-href-https-www-w-3-org-tr-selectors-4-xuan-ze-qi-complex-selector-a"><a class="header-anchor" href="#选择器-complex-selector"></a><span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL3NlbGVjdG9ycy00Lw==" title="https://www.w3.org/TR/selectors-4/">选择器 complex-selector<i class="fa fa-external-link"></i></span></h4>
+<p><img src="/archives/front-end/CSS/1555987337/CSS%E9%80%89%E6%8B%A9%E5%99%A8%E8%AF%AD%E6%B3%95%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90%E7%A4%BA%E4%BE%8B%E5%9B%BE.png" alt="css-selector-gamma"></p>
+<ul>
+<li>选择符 combinator
+<ul>
+<li><code>空格</code>: 后代选择器 选中所有子节点及其所有后代节点</li>
+<li><code>&gt;</code>: 子元素选择器 选中子节点</li>
+<li><code>+</code>: 相邻兄弟选择器 选中下一个相邻节点</li>
+<li><code>~</code>: 后续兄弟选择器 选中之后所有的相邻节点</li>
+<li><code>||</code>: <span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIubW96aWxsYS5vcmcvZW4tVVMvZG9jcy9XZWIvQ1NTL0NvbHVtbl9jb21iaW5hdG9y" title="https://developer.mozilla.org/en-US/docs/Web/CSS/Column_combinator">列组选择器 Column combinator<i class="fa fa-external-link"></i></span> (实验内容) 选择表格的一列</li>
+</ul>
+</li>
+<li>复合选择器 compound-selector
+<ul>
+<li>类型选择器 type-selector</li>
+<li>子选择器 subclass-selector
+<ul>
+<li>id</li>
+<li>class</li>
+<li>属性 attribute</li>
+<li>伪类 pseudo-class</li>
+</ul>
+</li>
+<li>伪元素 pseudo-element</li>
+</ul>
+</li>
+</ul>
+<h4 id="sheng-ming-shu-xing-he-zhi"><a class="header-anchor" href="#声明-属性和值"></a>声明: 属性和值</h4>
+<blockquote>
+<p>声明部分是一个由“属性: 值”组成的序列。</p>
+</blockquote>
+<ul>
+<li><strong>属性</strong> 是由中划线、下划线、字母等组成的标识符，CSS 还支持使用反斜杠转义。我们需要注意的是: 属性不允许使用连续的两个中划线开头，这样的属性会被认为是 CSS 变量。
+<blockquote>
+<p>在<span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy12YXJpYWJsZXMv" title="https://www.w3.org/TR/css-variables/">CSS Variables 标准<i class="fa fa-external-link"></i></span>中，以双中划线开头的属性被当作变量，与之配合的则是 var 函数:</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:root</span> &#123;</span><br><span class="line">  <span class="attribute">--main-color</span>: <span class="number">#06c</span>;</span><br><span class="line">  <span class="attribute">--accent-color</span>: <span class="number">#006</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* The rest of the CSS file */</span></span><br><span class="line"><span class="selector-id">#foo</span> <span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="built_in">var</span>(--main-color);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>值</strong> 的部分，主要<span class="exturl" data-url="aHR0cHM6Ly93d3cudzMub3JnL1RSL2Nzcy12YWx1ZXMtNC8=" title="https://www.w3.org/TR/css-values-4/">在标准 CSS Values and Unit<i class="fa fa-external-link"></i></span>，根据每个 CSS 属性可以取到不同的值，这里的值可能是字符串、标识符。</p>
+<blockquote>
+<p>CSS 属性值可能是以下类型。</p>
+</blockquote>
+<ul>
+<li><strong>CSS 范围的关键字</strong>: initial，unset，inherit，任何属性都可以的关键字。</li>
+<li><strong>字符串</strong>: 比如 content 属性。</li>
+<li><strong>URL</strong>: 使用 url() 函数的 URL 值。</li>
+<li><strong>整数 / 实数</strong>: 比如 flex 属性。</li>
+<li><strong>维度</strong>: 单位的整数 / 实数，比如 width 属性。</li>
+<li><strong>百分比</strong>: 大部分维度都支持。</li>
+<li><strong>颜色</strong>: 比如 background-color 属性。</li>
+<li><strong>图片</strong>: 比如 background-image 属性。</li>
+<li><strong>2D 位置</strong>: 比如 background-position 属性。</li>
+<li><strong>函数</strong>: 来自函数的值，比如 transform 属性。
+<blockquote>
+<p>CSS 支持一批特定的计算型函数:</p>
+</blockquote>
+</li>
+<li><strong>calc()</strong> 函数是基本的表达式计算，它支持加减乘除四则运算。在针对维度进行计算时，calc() 函数允许不同单位混合运算，这非常的有用。</li>
+<li><strong>max()</strong> 表示取两数中较大的一个</li>
+<li><strong>min()</strong> 表示取两数之中较小的一个</li>
+<li><strong>clamp()</strong> 给一个值限定一个范围，超出范围外则使用范围的最大或者最小值</li>
+<li><strong>toggle()</strong> (<span class="exturl" data-url="aHR0cDovL2NhaWJhb2ppYW4uY29tL2NzczMvdmFsdWVzL2Z1bmN0aW9uYWwvdG9nZ2xlKCkuaHRt" title="http://caibaojian.com/css3/values/functional/toggle().htm">不建议使用，在任何浏览器中都不生效<i class="fa fa-external-link"></i></span>)函数在规则选中多于一个元素时生效，它会在几个值之间来回切换，比如我们要让一个列表项的样式圆点和方点间隔出现，可以使用下面代码:</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span> &#123;</span><br><span class="line">  <span class="attribute">list-style-type</span>: <span class="built_in">toggle</span>(circle, square);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>attr()</strong> 函数允许 CSS 接受属性值的控制。</li>
+</ul>
+</li>
+</ul>
+<h2 id="gong-neng"><a class="header-anchor" href="#功能"></a>功能</h2>
+<h3 id="bu-ju"><a class="header-anchor" href="#布局"></a>布局</h3>
+<h4 id="zheng-chang-liu"><a class="header-anchor" href="#正常流"></a>正常流</h4>
+<blockquote>
+<p>浏览器最基本的排版方案是<strong>正常流排版</strong>，它包含了顺次排布和折行等规则，这是一个跟我们提到的印刷排版类似的排版方案，也跟我们平时书写文字的方式一致，所以我们把它叫做正常流。</p>
+<p>浏览器可以支持元素和文字的混排，元素被定义为占据长方形的区域，还允许边框、边距和留白，这个就是所谓的<strong>盒模型</strong></p>
+<p>在正常流的基础上，浏览器还支持两类元素: 绝对定位元素和浮动元素。</p>
+</blockquote>
+<ul>
+<li><strong>绝对定位元素</strong>把自身从正常流抽出，直接由 top 和 left 等属性确定自身的位置，不参加排版计算，也不影响其它元素。绝对定位元素由 position 属性控制。</li>
+<li><strong>浮动元素</strong>则是使得自己在正常流的位置向左或者向右移动到边界，并且占据一块排版空间。浮动元素由 float 属性控制。</li>
+</ul>
+<h4 id="dan-xing-bu-ju-flex"><a class="header-anchor" href="#弹性布局-flex"></a>弹性布局 flex</h4>
+<h4 id="zha-ge-bu-ju-grid"><a class="header-anchor" href="#栅格布局-grid"></a>栅格布局 grid</h4>
+<h3 id="hui-zhi"><a class="header-anchor" href="#绘制"></a>绘制</h3>
+<h4 id="yan-se-he-xing-zhuang"><a class="header-anchor" href="#颜色和形状"></a>颜色和形状</h4>
+<h4 id="wen-zi-xiang-guan"><a class="header-anchor" href="#文字相关"></a>文字相关</h4>
+<h3 id="jiao-hu"><a class="header-anchor" href="#交互"></a>交互</h3>
+<h4 id="dong-hua"><a class="header-anchor" href="#动画"></a>动画</h4>
+<h4 id="qi-ta-jiao-hu"><a class="header-anchor" href="#其他交互"></a>其他交互</h4>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>ZakaryCode</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://zakarycode.github.io/archives/front-end/CSS/1555987337.html" title="CSS 整理">https://zakarycode.github.io/archives/front-end/CSS/1555987337.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/record/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/Relearning-front-end/" rel="tag"># 重学前端</a>
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/front-end/HTML/1555987336.html" rel="next" title="HTML 整理">
+                <i class="fa fa-chevron-left"></i> HTML 整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/front-end/JavaScript/1555988415.html" rel="prev" title="JavaScript 整理">
+                JavaScript 整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/Z.png" alt="ZakaryCode">
+            
+              <p class="site-author-name" itemprop="name">ZakaryCode</p>
+              <p class="site-description motion-element" itemprop="description">日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90Lm1lL1pha2FyeUNvZGU=" title="Telegram &rarr; https://t.me/ZakaryCode"><i class="fa fa-fw fa-telegram"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9wbHVzLmdvb2dsZS5jb20vMTA3NzcwNDA4OTQ5MDgzMzU5NTgz" title="Google &rarr; https://plus.google.com/107770408949083359583"><i class="fa fa-fw fa-google"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aYWthcnlDb2Rl" title="Twitter &rarr; https://twitter.com/ZakaryCode"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tLzEwMDAxNDk1MzUzODEwMg==" title="FB Page &rarr; https://www.facebook.com/100014953538102"><i class="fa fa-fw fa-facebook"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpha2FyeWNvZGVAZ21haWwuY29t" title="E-Mail &rarr; mailto:zakarycode@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#yu-fa"><span class="nav-number">1.</span> <span class="nav-text">语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rule-gui-ze"><span class="nav-number">1.1.</span> <span class="nav-text">@rule 规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pu-tong-gui-ze"><span class="nav-number">1.2.</span> <span class="nav-text">普通规则</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#a-href-https-www-w-3-org-tr-selectors-4-xuan-ze-qi-complex-selector-a"><span class="nav-number">1.2.1.</span> <span class="nav-text">选择器 complex-selector</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sheng-ming-shu-xing-he-zhi"><span class="nav-number">1.2.2.</span> <span class="nav-text">声明: 属性和值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gong-neng"><span class="nav-number">2.</span> <span class="nav-text">功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#bu-ju"><span class="nav-number">2.1.</span> <span class="nav-text">布局</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#zheng-chang-liu"><span class="nav-number">2.1.1.</span> <span class="nav-text">正常流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dan-xing-bu-ju-flex"><span class="nav-number">2.1.2.</span> <span class="nav-text">弹性布局 flex</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zha-ge-bu-ju-grid"><span class="nav-number">2.1.3.</span> <span class="nav-text">栅格布局 grid</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hui-zhi"><span class="nav-number">2.2.</span> <span class="nav-text">绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yan-se-he-xing-zhuang"><span class="nav-number">2.2.1.</span> <span class="nav-text">颜色和形状</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wen-zi-xiang-guan"><span class="nav-number">2.2.2.</span> <span class="nav-text">文字相关</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jiao-hu"><span class="nav-number">2.3.</span> <span class="nav-text">交互</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dong-hua"><span class="nav-number">2.3.1.</span> <span class="nav-text">动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qi-ta-jiao-hu"><span class="nav-number">2.3.2.</span> <span class="nav-text">其他交互</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu"> </span>&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-bolt"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zakary Zhu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://zakarycode.disqus.com/count.js" async></script>
+  
+
+  
+    <script>
+      var disqus_config = function () {
+        this.page.url = "https://zakarycode.github.io/archives/front-end/CSS/1555987337.html";
+        this.page.identifier = "archives/front-end/CSS/1555987337.html";
+        this.page.title = 'CSS 整理';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zakarycode.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        $(function () {
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          if (offsetTop <= 0) {
+            // load directly when there's no a scrollbar
+            loadComments();
+          } else {
+            $(window).on('scroll.disqus_scroll', function () {
+              // offsetTop may changes because of manually resizing browser window or lazy loading images.
+              var offsetTop = $('#comments').offset().top - $(window).height();
+              var scrollTop = $(window).scrollTop();
+
+              // pre-load comments a bit? (margin or anything else)
+              if (offsetTop - scrollTop < 60) {
+                $(window).off('.disqus_scroll');
+                loadComments();
+              }
+            });
+          }
+        });
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('manual', "#more");
+  
+  </script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>

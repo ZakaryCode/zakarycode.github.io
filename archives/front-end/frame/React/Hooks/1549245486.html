@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CH,zh-cn,en,default">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=6.6.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-z.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-z.png?v=6.6.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <meta name="description" content="自从第一个关于React Hooks的 alpha 版本发布以来，有一个问题不断出现在讨论中：“为什么是 Hook 而非 &amp;lt;一些其他的 API&amp;gt; ？” 提示一下，以下的这些就是Hooks：  useState() 用于声明一个状态变量。 useEffect() 用于声明一个补充规则(side effect)。 useContext() 用于读取一些上下文的内容。  但是仍有一些其他的">
+<meta name="keywords" content="JavaScript,ECMAScript,Web开发,框架,性能,译文,React,Programming,React Hooks">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么选择Hook而非……?">
+<meta property="og:url" content="https://zakarycode.github.io/archives/front-end/frame/React/Hooks/1549245486.html">
+<meta property="og:site_name" content="Zakary Zhu&#39;s Blog">
+<meta property="og:description" content="自从第一个关于React Hooks的 alpha 版本发布以来，有一个问题不断出现在讨论中：“为什么是 Hook 而非 &amp;lt;一些其他的 API&amp;gt; ？” 提示一下，以下的这些就是Hooks：  useState() 用于声明一个状态变量。 useEffect() 用于声明一个补充规则(side effect)。 useContext() 用于读取一些上下文的内容。  但是仍有一些其他的">
+<meta property="og:locale" content="zh-CH">
+<meta property="og:updated_time" content="2019-02-05T14:00:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么选择Hook而非……?">
+<meta name="twitter:description" content="自从第一个关于React Hooks的 alpha 版本发布以来，有一个问题不断出现在讨论中：“为什么是 Hook 而非 &amp;lt;一些其他的 API&amp;gt; ？” 提示一下，以下的这些就是Hooks：  useState() 用于声明一个状态变量。 useEffect() 用于声明一个补充规则(side effect)。 useContext() 用于读取一些上下文的内容。  但是仍有一些其他的">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zakary Zhu's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://zakarycode.github.io/archives/front-end/frame/React/Hooks/1549245486.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>为什么选择Hook而非……? | Zakary Zhu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CH">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zakary Zhu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Try to find the way about self-improvement.</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL1pha2FyeUNvZGU=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zakarycode.github.io/archives/front-end/frame/React/Hooks/1549245486.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZakaryCode">
+      <meta itemprop="description" content="日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。">
+      <meta itemprop="image" content="/images/Z.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zakary Zhu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">为什么选择Hook而非……?
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-02-04 09:58:06" itemprop="dateCreated datePublished" datetime="2019-02-04T09:58:06+08:00">2019-02-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-02-05 22:00:34" itemprop="dateModified" datetime="2019-02-05T22:00:34+08:00">2019-02-05</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/frame/" itemprop="url" rel="index"><span itemprop="name">框架</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/frame/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/frame/React/Hooks/" itemprop="url" rel="index"><span itemprop="name">Hooks</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/front-end/frame/React/Hooks/1549245486.html#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="archives/front-end/frame/React/Hooks/1549245486.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>自从第一个关于<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9ob29rcw==" title="https://reactjs.org/hooks">React Hooks<i class="fa fa-external-link"></i></span>的 alpha 版本发布以来，有一个问题不断出现在讨论中：“为什么是 Hook 而非 <em>&lt;一些其他的 API&gt;</em> ？”</p>
+<p>提示一下，以下的这些就<em>是</em>Hooks：</p>
+<ul>
+<li><span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2hvb2tzLXJlZmVyZW5jZS5odG1sI3VzZXN0YXRl" title="https://reactjs.org/docs/hooks-reference.html#usestate"><code>useState()</code><i class="fa fa-external-link"></i></span> 用于声明一个状态变量。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2hvb2tzLXJlZmVyZW5jZS5odG1sI3VzZWVmZmVjdA==" title="https://reactjs.org/docs/hooks-reference.html#useeffect"><code>useEffect()</code><i class="fa fa-external-link"></i></span> 用于声明一个补充规则(side effect)。</li>
+<li><span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2hvb2tzLXJlZmVyZW5jZS5odG1sI3VzZWNvbnRleHQ=" title="https://reactjs.org/docs/hooks-reference.html#usecontext"><code>useContext()</code><i class="fa fa-external-link"></i></span> 用于读取一些上下文的内容。</li>
+</ul>
+<p>但是仍有一些其他的 API，例如<code>React.memo()</code>和<code>&lt;Context.Provider&gt;</code>，它们<em>不是</em>Hooks。通常提出的 Hook 版本会建议是<em>noncompositional</em>或者<em>antimodular</em>。本文将帮助你了解原因。</p>
+<p><strong>提示：这篇文章对那些对 API 讨论感兴趣的人来说是一个深刻的话题，你不需要考虑使用 React 来提升效率！</strong></p>
+<a id="more"></a>
+<hr>
+<h2 id="qian-ti"><a class="header-anchor" href="#前提"></a>前提</h2>
+<blockquote>
+<p>我们希望 React API 保留两个重要属性：</p>
+</blockquote>
+<ol>
+<li><strong>构成 Composition:</strong> <span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2hvb2tzLWN1c3RvbS5odG1s" title="https://reactjs.org/docs/hooks-custom.html">定制 Hooks<i class="fa fa-external-link"></i></span>很大程度上是我们对 Hooks API 感到兴奋的原因。我们希望大家可以频繁的构建自己的 Hooks，并且我们需要保证不同人写的 Hooks<span class="exturl" data-url="aHR0cHM6Ly9vdmVycmVhY3RlZC5pby93aHktZG8taG9va3MtcmVseS1vbi1jYWxsLW9yZGVyLyNmbGF3LTQtdGhlLWRpYW1vbmQtcHJvYmxlbQ==" title="https://overreacted.io/why-do-hooks-rely-on-call-order/#flaw-4-the-diamond-problem">不会发生冲突<i class="fa fa-external-link"></i></span>。（我们大概会被编写清爽且不会相互破坏的组件这样的体验宠坏吧！）</li>
+<li><strong>调试 Debugging:</strong> 我们希望随着程序的增长，Bugs<a href="/archives/front-end/network-request/1549245751.html">很容易找到</a>。React 的最佳特征之一就是——如果你看到呈现出了任何错误，都能够通过结构树找到那个组件的 prop 或 state 导致的错误。</li>
+</ol>
+<p>这两个约束放在一起可以告诉我们什么可以或<em>不可以</em>使用 Hook。让我们看几个例子。</p>
+<hr>
+<h2 id="shi-yong-hook-code-use-state-code"><a class="header-anchor" href="#使用-hook：usestate"></a>使用 Hook：<code>useState()</code></h2>
+<h3 id="gou-cheng-composition"><a class="header-anchor" href="#构成-composition"></a>构成 Composition</h3>
+<p>每个调用<code>useState()</code>的多个自定义 Hook 都不会冲突：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useMyCustomHook1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="comment">// What happens here, stays here.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useMyCustomHook2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [value, setValue] = useState(<span class="number">0</span>);</span><br><span class="line">  <span class="comment">// What happens here, stays here.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyComponent</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  useMyCustomHook1();</span><br><span class="line">  useMyCustomHook2();</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加一个新的无条件<code>useState()</code>调用总是安全的。你不需要了解组件用于声明新状态变量的其他 Hook，也不能通过更新其中一个来破坏其他的状态变量。</p>
+<p><strong>结论：</strong> ✅ <code>useState()</code>不会使自定义 Hook 易碎。</p>
+<h3 id="diao-shi-debugging"><a class="header-anchor" href="#调试-debugging"></a>调试 Debugging</h3>
+<p>钩子会很有用，因为你可以用过它<em>传递</em>值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useWindowWidth</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [width, setWidth] = useState(<span class="built_in">window</span>.innerWidth);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">return</span> width;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useTheme</span>(<span class="params">isMobile</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Comment</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> width = useWindowWidth();</span><br><span class="line">  <span class="keyword">const</span> isMobile = width &lt; MOBILE_VIEWPORT;</span><br><span class="line">  <span class="keyword">const</span> theme = useTheme(isMobile);</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">section</span> <span class="attr">className</span>=<span class="string">&#123;theme.comment&#125;</span>&gt;</span>&#123;/* ... */&#125;<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是如果我们犯错了呢？该如何调试？</p>
+<p>假设我们从<code>theme.comment</code>获得的 CSS 类是错误的，我们该如何调试？我们可以在组件的主体中设置断点或几个日志输出。</p>
+<p>也许我们会看到<code>theme</code>错误但是<code>width</code>和<code>isMobile</code>是正确的。这会告诉我们问题是<code>useTheme()</code>中的。或者也许我们会看到<code>width</code>本身就是错的，那我们就应该查看<code>useWindowWidth()</code>。</p>
+<p><strong>单独查看中间值会告诉我们顶层的那些 Hook 包含 Bug</strong>。我们不需要查看他们<em>所有的</em>实现。</p>
+<p>然后我们可以“放大”有 Bug 的部分并尝试复现。</p>
+<p>随着自定义 Hook 嵌套的深度增加，这会变得更加重要。想象我们有 3 个级别的自定义 Hook 嵌套，每个级别使用 3 个不同的自定义 Hooks。寻找<strong>3 处</strong>与潜在检查<strong>3 + 3×3 + 3×3×3 = 39 处</strong>之间的<a href="/archives/front-end/network-request/1549245751.html">差异</a>是巨大的。幸运的是，<code>useState()</code>不能神奇的“影响”其他钩子或组件，它返回的错误值会在它后面留下一条痕迹，就像任何变量一样。🐛</p>
+<p><strong>结论：</strong> ✅ <code>useState()</code>不会遮掩我们代码中的因果关系，我们可以直接通过痕迹追踪到 Bug。</p>
+<hr>
+<h2 id="bu-ying-shi-yong-hook-code-use-bailout-code"><a class="header-anchor" href="#不应使用-hook：usebailout"></a>不应使用 Hook：<code>useBailout()</code></h2>
+<p>作为优化，使用 Hooks 的组件可以避免重新渲染。</p>
+<p>一种方法是将整个组件周围方式一个<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9ibG9nLzIwMTgvMTAvMjMvcmVhY3Qtdi0xNi02Lmh0bWwjcmVhY3RtZW1v" title="https://reactjs.org/blog/2018/10/23/react-v-16-6.html#reactmemo"><code>React.memo()</code><i class="fa fa-external-link"></i></span>包装器。如果 props 与我们在上一次渲染的过程中的 props 非常相等，他就会失去重新渲染的效果，这很类似<code>PureComponent</code>类。</p>
+<p><code>React.memo()</code>接受一个组件并返回一个组件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Button</span>(<span class="params">props</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> React.memo(Button);</span><br></pre></td></tr></table></figure>
+<p><strong>但是为什么它不仅是个 Hook?</strong></p>
+<p>无论你将它成为<code>useShouldComponentUpdate()</code>，<code>usePure()</code>，<code>useSkipRender()</code>或<code>useBailout()</code>，这个体验往往看起来是这样的：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Button</span>(<span class="params">&#123; color &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ⚠️ Not a real API</span></span><br><span class="line">  useBailout(<span class="function">(<span class="params">prevColor</span>) =&gt;</span> prevColor !== color, color);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">button</span> <span class="attr">className</span>=<span class="string">&#123;</span>'<span class="attr">button-</span>' + <span class="attr">color</span>&#125;&gt;</span>OK<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有一些变化（eg：一个简单的<code>usePure()</code>标记）但是在广泛的笔划中他们具有相同的缺陷。</p>
+<h3 id="gou-cheng-composition-1"><a class="header-anchor" href="#构成-composition-v2"></a>构成 Composition</h3>
+<p>假设我们尝试将<code>useBailout()</code>放在两个自定义 Hooks 中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useFriendStatus</span>(<span class="params">friendID</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [isOnline, setIsOnline] = useState(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ⚠️ Not a real API  useBailout(prevIsOnline =&gt; prevIsOnline !== isOnline, isOnline);</span></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> handleStatusChange = <span class="function">(<span class="params">status</span>) =&gt;</span> setIsOnline(status.isOnline);</span><br><span class="line">    ChatAPI.subscribe(friendID, handleStatusChange);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> ChatAPI.unsubscribe(friendID, handleStatusChange);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> isOnline;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">useWindowWidth</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> [width, setWidth] = useState(<span class="built_in">window</span>.innerWidth);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ⚠️ Not a real API  useBailout(prevWidth =&gt; prevWidth !== width, width);</span></span><br><span class="line">  useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> handleResize = <span class="function"><span class="params">()</span> =&gt;</span> setWidth(<span class="built_in">window</span>.innerWidth);</span><br><span class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'resize'</span>, handleResize);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">window</span>.removeEventListener(<span class="string">'resize'</span>, handleResize);</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> width;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在如果你在同一个组件使用它们会发生什么？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ChatThread</span>(<span class="params">&#123; friendID, isTyping &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> width = useWindowWidth();</span><br><span class="line">  <span class="keyword">const</span> isOnline = useFriendStatus(friendID);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ChatLayout width=&#123;width&#125;&gt;</span><br><span class="line">      &lt;FriendStatus isOnline=&#123;isOnline&#125; /&gt;</span><br><span class="line">      &#123;isTyping &amp;&amp; <span class="string">'Typing...'</span>&#125;</span><br><span class="line">    &lt;<span class="regexp">/ChatLayout&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>什么时候重新渲染？</p>
+<p>如果每个<code>useBailout()</code>调用都有权跳过更新，那么来自<code>useWindowWidth()</code>的更新将被<code>useFriendStatus()</code>阻塞，反之亦然。<strong>这些 Hook 会相互破坏</strong>。</p>
+<p>但是，如果<code>useBailout()</code>尽在单个组件内的<em>所有</em>调用“同意”阻止更新时才能使用，那么我们的<code>ChatThread</code>将无法更新<code>isTyping</code>prop 的更改。</p>
+<p>更糟糕的是，使用这些语义<strong>任何新添加到 ChatThread 的 Hook 如果没有调用 useBailout()将会损坏</strong>。否则，他们不能“反对”使用<code>useWindowWidth()</code>和 <code>useFriendStatus()</code>救助。</p>
+<p><strong>结论：</strong> 🔴 <code>useBailout()</code>打破了构建方式，将其添加到 Hook 会破坏其他 Hook 的状态更新。我们希望 API 可以具有<span class="exturl" data-url="aHR0cHM6Ly9vdmVycmVhY3RlZC5pby9vcHRpbWl6ZWQtZm9yLWNoYW5nZS8=" title="https://overreacted.io/optimized-for-change/">防碎性<i class="fa fa-external-link"></i></span>，而这种行为却背道而驰。</p>
+<h3 id="diao-shi-debugging-1"><a class="header-anchor" href="#调试-debugging-v2"></a>调试 Debugging</h3>
+<p>像<code>useBailout()</code>这样的 Hook 如何影响调试？</p>
+<p>我们将使用相同的示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ChatThread</span>(<span class="params">&#123; friendID, isTyping &#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> width = useWindowWidth();</span><br><span class="line">  <span class="keyword">const</span> isOnline = useFriendStatus(friendID);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;ChatLayout width=&#123;width&#125;&gt;</span><br><span class="line">      &lt;FriendStatus isOnline=&#123;isOnline&#125; /&gt;</span><br><span class="line">      &#123;isTyping &amp;&amp; <span class="string">'Typing...'</span>&#125;</span><br><span class="line">    &lt;<span class="regexp">/ChatLayout&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>当我们期望<code>Typing...</code>标签不会出现，即便在上层的 prop 正在发生变化。我们该怎么调试？</p>
+<p><strong>通常，在 React 中你自信可以通过查找来给出确切的回答</strong>。如果<code>ChatThread</code>没能得到一个新的<code>isTyping</code>值，我们可以打开呈现<code>&lt;ChatThread isTyping={myVar} /&gt;</code>的组件并检查<code>myVar</code>，以此类推。在其中一个级别，我们要么找到一个错误的<code>shouldComponentUpdate()</code>救助，要么传递不正确的<code>isTyping</code>值。一看链中的每个组件通常足以追寻到问题的根源。</p>
+<p>但是如果这个<code>useBailout()</code>Hook 是真的，你永远也不会知道更新被跳过的原因，知道你检查我们的<code>ChatThread</code>及其所有者链中的组件使用的<em>每个自定义 Hook</em>（的深度）。由于每个父组件也可以使用自定义 Hook，因此<a href="/archives/front-end/network-request/1549245751.html">拓展</a>非常糟糕。</p>
+<p>就像你在抽屉里寻找一把螺丝刀一样，每个抽绎都有一堆较小的抽屉柜，你不知道兔子洞有多深。</p>
+<p><strong>结论：</strong> 🔴 <code>useBailout()</code>Hook 不仅打破了构建，更大大增加了调试步骤和求助所需的认知门槛——在某些情况下，呈指数式增加。</p>
+<hr>
+<p>我们只看到了一个真正的 Hook，<code>useState()</code>，还有一个关于<em>不该使用</em>Hook 的常规建议——<code>useBailout()</code>。我们通过构建和调试的棱镜对他们进行了比较，讨论了它们中工作与否的原因。</p>
+<p>虽然没有<code>memo()</code>和<code>shouldComponentUpdate()</code>的“Hook 版本”，但 React<em>会</em>提供一个 Hook 调用<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL2hvb2tzLXJlZmVyZW5jZS5odG1sI3VzZW1lbW8=" title="https://reactjs.org/docs/hooks-reference.html#usememo"><code>useMemo()</code><i class="fa fa-external-link"></i></span>的方法。它有类似的用途，但它语义不同，并不会遭遇上述陷阱。</p>
+<p><code>useBailout()</code>只是一个不该使用 Hook 工作的例子，还有很多类似的——例如：<code>useProvider()</code>，<code>useCatch()</code>或<code>useSuspense()</code>。</p>
+<p>你明白为什么吗？</p>
+<p><em>（小声：组成…调试…）</em></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9tb2JpbGUudHdpdHRlci5jb20vc2VhcmNoP3E9aHR0cHMlM0ElMkYlMkZvdmVycmVhY3RlZC5pbyUyRndoeS1pc250LXgtYS1ob29rJTJG" title="https://mobile.twitter.com/search?q=https%3A%2F%2Foverreacted.io%2Fwhy-isnt-x-a-hook%2F">Discuss on Twitter<i class="fa fa-external-link"></i></span> • <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dhZWFyb24vb3ZlcnJlYWN0ZWQuaW8vZWRpdC9tYXN0ZXIvc3JjL3BhZ2VzL3doeS1pc250LXgtYS1ob29rL2luZGV4Lm1k" title="https://github.com/gaearon/overreacted.io/edit/master/src/pages/why-isnt-x-a-hook/index.md">Edit on GitHub<i class="fa fa-external-link"></i></span></p>
+<p>原文链接： <span class="exturl" data-url="aHR0cHM6Ly9vdmVycmVhY3RlZC5pby93aHktaXNudC14LWEtaG9vay8=" title="https://overreacted.io/why-isnt-x-a-hook/">Why Isn’t X a Hook?<i class="fa fa-external-link"></i></span></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>ZakaryCode</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://zakarycode.github.io/archives/front-end/frame/React/Hooks/1549245486.html" title="为什么选择Hook而非……?">https://zakarycode.github.io/archives/front-end/frame/React/Hooks/1549245486.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/ECMAScript/" rel="tag"># ECMAScript</a>
+          
+            <a href="/tags/Web-Development/" rel="tag"># Web开发</a>
+          
+            <a href="/tags/frame/" rel="tag"># 框架</a>
+          
+            <a href="/tags/performance/" rel="tag"># 性能</a>
+          
+            <a href="/tags/translation/" rel="tag"># 译文</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/Programming/" rel="tag"># Programming</a>
+          
+            <a href="/tags/React-Hooks/" rel="tag"># React Hooks</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/front-end/frame/React/1549201490.html" rel="next" title="将React作为UI运行">
+                <i class="fa fa-chevron-left"></i> 将React作为UI运行
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/front-end/network-request/1549245751.html" rel="prev" title="关于'Bug-O'表示法">
+                关于'Bug-O'表示法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/Z.png" alt="ZakaryCode">
+            
+              <p class="site-author-name" itemprop="name">ZakaryCode</p>
+              <p class="site-description motion-element" itemprop="description">日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90Lm1lL1pha2FyeUNvZGU=" title="Telegram &rarr; https://t.me/ZakaryCode"><i class="fa fa-fw fa-telegram"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9wbHVzLmdvb2dsZS5jb20vMTA3NzcwNDA4OTQ5MDgzMzU5NTgz" title="Google &rarr; https://plus.google.com/107770408949083359583"><i class="fa fa-fw fa-google"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aYWthcnlDb2Rl" title="Twitter &rarr; https://twitter.com/ZakaryCode"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tLzEwMDAxNDk1MzUzODEwMg==" title="FB Page &rarr; https://www.facebook.com/100014953538102"><i class="fa fa-fw fa-facebook"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpha2FyeWNvZGVAZ21haWwuY29t" title="E-Mail &rarr; mailto:zakarycode@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#qian-ti"><span class="nav-number">1.</span> <span class="nav-text">前提</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shi-yong-hook-code-use-state-code"><span class="nav-number">2.</span> <span class="nav-text">使用 Hook：useState()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gou-cheng-composition"><span class="nav-number">2.1.</span> <span class="nav-text">构成 Composition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diao-shi-debugging"><span class="nav-number">2.2.</span> <span class="nav-text">调试 Debugging</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bu-ying-shi-yong-hook-code-use-bailout-code"><span class="nav-number">3.</span> <span class="nav-text">不应使用 Hook：useBailout()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gou-cheng-composition-1"><span class="nav-number">3.1.</span> <span class="nav-text">构成 Composition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#diao-shi-debugging-1"><span class="nav-number">3.2.</span> <span class="nav-text">调试 Debugging</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu"> </span>&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-bolt"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zakary Zhu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://zakarycode.disqus.com/count.js" async></script>
+  
+
+  
+    <script>
+      var disqus_config = function () {
+        this.page.url = "https://zakarycode.github.io/archives/front-end/frame/React/Hooks/1549245486.html";
+        this.page.identifier = "archives/front-end/frame/React/Hooks/1549245486.html";
+        this.page.title = '为什么选择Hook而非……?';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zakarycode.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        $(function () {
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          if (offsetTop <= 0) {
+            // load directly when there's no a scrollbar
+            loadComments();
+          } else {
+            $(window).on('scroll.disqus_scroll', function () {
+              // offsetTop may changes because of manually resizing browser window or lazy loading images.
+              var offsetTop = $('#comments').offset().top - $(window).height();
+              var scrollTop = $(window).scrollTop();
+
+              // pre-load comments a bit? (margin or anything else)
+              if (offsetTop - scrollTop < 60) {
+                $(window).off('.disqus_scroll');
+                loadComments();
+              }
+            });
+          }
+        });
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('manual', "#more");
+  
+  </script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>

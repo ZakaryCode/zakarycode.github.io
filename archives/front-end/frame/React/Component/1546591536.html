@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CH,zh-cn,en,default">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=6.6.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-z.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-z.png?v=6.6.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <meta name="keywords" content="CSS,JavaScript,ECMAScript,框架,译文,React,组件样式,CSS In JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="覆盖模式——提高React组件的复用率">
+<meta property="og:url" content="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536.html">
+<meta property="og:site_name" content="Zakary Zhu&#39;s Blog">
+<meta property="og:locale" content="zh-CH">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536/Overrides-React-Pattern.png">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536/Overriding-a-RadioGroup-component-for-Uber-Freight.png">
+<meta property="og:image" content="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536/Adding-tag-Edit-behavior-using-a-component-override.gif">
+<meta property="og:updated_time" content="2019-01-07T03:03:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="覆盖模式——提高React组件的复用率">
+<meta name="twitter:image" content="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536/Overrides-React-Pattern.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zakary Zhu's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>覆盖模式——提高React组件的复用率 | Zakary Zhu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CH">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zakary Zhu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Try to find the way about self-improvement.</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL1pha2FyeUNvZGU=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZakaryCode">
+      <meta itemprop="description" content="日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。">
+      <meta itemprop="image" content="/images/Z.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zakary Zhu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">覆盖模式——提高React组件的复用率
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-01-04 16:45:36" itemprop="dateCreated datePublished" datetime="2019-01-04T16:45:36+08:00">2019-01-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-01-07 11:03:29" itemprop="dateModified" datetime="2019-01-07T11:03:29+08:00">2019-01-07</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/frame/" itemprop="url" rel="index"><span itemprop="name">框架</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/frame/React/" itemprop="url" rel="index"><span itemprop="name">React</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/front-end/frame/React/Component/" itemprop="url" rel="index"><span itemprop="name">Component</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/front-end/frame/React/Component/1546591536.html#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="archives/front-end/frame/React/Component/1546591536.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/archives/front-end/frame/React/Component/1546591536/Overrides-React-Pattern.png" alt="Overrides React Pattern"></p>
+<a id="more"></a>
+<p>如果你在过去几年中一直在关注 React 生态系统，那么在众多用于开发人员在构建应用程序时可以使用的<span class="exturl" data-url="aHR0cHM6Ly9oYWNrZXJub29uLmNvbS8yMy1iZXN0LXJlYWN0LXVpLWNvbXBvbmVudC1saWJyYXJpZXMtYW5kLWZyYW1ld29ya3MtMjUwYTgxYjJhYzQy" title="https://hackernoon.com/23-best-react-ui-component-libraries-and-frameworks-250a81b2ac42">开源可重用组件库<i class="fa fa-external-link"></i></span>中，你至少曾尝试或听说过一个。这些库使我们不必再为每个应用程序反复构建相同的模态，菜单和表单控件。</p>
+<p>那些曾经使用过其中一个库的人可能也遇到过一个组件不太适合你需要的场景，也许是组件的设计和你需要的不要一样，并且那些组件没有暴露出可以配置样式的 API；又或许是你只是想要一个样式自定义的复选框。</p>
+<p>这在我们优步是一个很常见的情绪了，由于团队经常被迫开始构建一个新的组件，这导致了很多无谓的浪费。因此，当我们最近着手改造我们心爱（但老旧）的组件库的时候，我们调查了数十位工程师，一遍更好地了解他们在复用现有的组件时遇到的障碍。有几点很明确：</p>
+<ul>
+<li><strong>Styles:</strong> 开发者需要能够配置组件及其内部组件的样式。这对于 global CSS 或许很容易，但是在 CSS-in-JS 的世界中，每个元素都可以有任意类封装在组件之中，想要实现就变得十分的困难了。</li>
+<li><strong>Props:</strong> 有时候你只是需要改变传递给内部组件的 props。例如给元素添加一个<code>aria-label</code>属性，或者是在集成测试中将<code>className</code>传递给指定的目标。</li>
+<li><strong>Render:</strong> 在很多情况下，人们只是希望能够完全覆盖某些内部的渲染或行为——例如，想添加到日期选择器添加一个快捷选择的选项（如：“过去 30 天”）。</li>
+</ul>
+<p>我们当然不是第一个试图去解决这些问题的人。在 React 社区中推广的<span class="exturl" data-url="aHR0cHM6Ly9yZWFjdGpzLm9yZy9kb2NzL3JlbmRlci1wcm9wcy5odG1s" title="https://reactjs.org/docs/render-props.html">render props<i class="fa fa-external-link"></i></span>模式是一种允许更多方法控制一个组件渲染方式的策略。Paypal 的<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BheXBhbC9kb3duc2hpZnQ=" title="https://github.com/paypal/downshift">downshift<i class="fa fa-external-link"></i></span> 也是一个很好的例子，这使你可以明确如果使用 render props 可以达成的效果。</p>
+<p>但是 render props 对于许多情况来说都是一个很好的工具，如果你只是想覆盖一个样式或者改变一些内部元素的 props，这样做可能就有点沉重了。类似的，组件作者有时候会提供像是<em>getFooStyle</em>或<em>getFooProps</em>这样的 props 来定制一些内部元素，但是这些很少以一致的方式提供给所有的内部组件。</p>
+<p>我们希望在我们的组件中提供一个统一的 API，它提供了渲染所有的灵活方式，但同时有可以有捷径，适用于只需要覆盖一些内部样式或 props 非常频繁的场景。</p>
+<p>我们提出的解决方案称之为“Overrides”模式（覆盖模式）。它仍在不断发展，但到目前为止，我们对开发人员使用它的方法感到印象深刻。我们希望与更广泛的社区分享，希望它能激发其他组件库作者的兴趣，或者至少提高对组件复用性当前缺陷的认识。下面将展示它是如何实现的。</p>
+<h2 id="fu-gai-gong-gong-de-api"><a class="header-anchor" href="#覆盖公共的-api"></a>覆盖公共的 API</h2>
+<p>下面的代码片段演示了覆盖模式在可复用 Autocomplete 组件的具体实现：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.js</span></span><br><span class="line">render() &#123;</span><br><span class="line">  &lt;Autocomplete</span><br><span class="line">    options=&#123;<span class="keyword">this</span>.props.products&#125;</span><br><span class="line">    overrides=&#123;&#123;</span><br><span class="line">      Root: &#123;</span><br><span class="line">        props: &#123;<span class="string">'aria-label'</span>: <span class="string">'Select an option'</span>&#125;,</span><br><span class="line">        style: <span class="function">(<span class="params">&#123;$isOpen&#125;</span>) =&gt;</span> (&#123;<span class="attr">borderColor</span>: $isOpen ? <span class="string">'blue'</span> : <span class="string">'grey'</span>&#125;),</span><br><span class="line">      &#125;,</span><br><span class="line">      Option: &#123;</span><br><span class="line">        component: CustomOption</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;&#125;</span><br><span class="line">  /&gt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// CustomOption.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">CustomOption</span>(<span class="params">&#123;onClick, $option&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    &lt;div onClick=&#123;onClick&#125;&gt;</span><br><span class="line">      &lt;h4&gt;&#123;$option.name&#125;&lt;<span class="regexp">/h4&gt;</span></span><br><span class="line"><span class="regexp">      &lt;small&gt;&#123;$option.price&#125;&lt;/</span>small&gt;</span><br><span class="line">    &lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">  );</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line">// https://gist.github.com/schnerd/045ee729696f0352bb106b186eb50855#file-overrides-example-public-js</span><br></pre></td></tr></table></figure>
+<p>这里有很多内容，让我们来看看一些关键的变化：</p>
+<ul>
+<li>每一个内部元素都有一个开发者可以定位的标识符。这里我们使用的是<em>Root</em>和<em>Option</em>。你几乎可以将这些视为类名（但没有 CSS 级联和全局命名空间的缺点）</li>
+<li>对于每个内部元素，你都可以覆盖<strong>props</strong>，<strong>style</strong>，和<strong>component</strong>.</li>
+<li>覆盖 props 非常直接，你指定的对象将使用默认道具传递，并优先于它们。在这种情况下，你可以看到我们正在使用它在 Root 元素上来添加<code>aria-label</code>。</li>
+<li>当覆盖<strong>style</strong>时，你可以传递一个样式对象或者接受与组件当前内部状态相关的一些道具的函数，允许你更具组件状态动态地更改样式，如<code>isError</code>或<code>isSelected</code>。函数返回的样式对象与默认元素样式深度合并。</li>
+<li>当覆盖<strong>component</strong>时，可以传入无状态功能组件或 React 组件类，你可以在其中以供自己的渲染逻辑，也可以选择添加其他处理程序或行为。这实际上是依赖注入，并解锁了更多可能性。</li>
+</ul>
+<p>通过一个统一的<code>overrides</code>支柱提供所有这些功能，为开发人员提供了一个一致的方法定制所需内容。</p>
+<h2 id="fu-gai-zu-jian-xing-wei"><a class="header-anchor" href="#覆盖组件行为"></a>覆盖组件行为</h2>
+<p>为了让你了解我们团队如何使用此功能，以下是优步货运团队的一个示例：</p>
+<p><img src="/archives/front-end/frame/React/Component/1546591536/Overriding-a-RadioGroup-component-for-Uber-Freight.png" alt="Overriding a RadioGroup component for Uber Freight"></p>
+<p>他们想要使用同一个 API、键盘控制和事件为一个 radio 组来创建表单元素，但是有不同的视觉外观。他们能够在我们现有的<code>RadioGroup</code>组件智商添加一系列样式覆盖，而不必浪费地构建，测试和维护他们自己的自定义实现。</p>
+<p><img src="/archives/front-end/frame/React/Component/1546591536/Adding-tag-Edit-behavior-using-a-component-override.gif" alt="Adding tag &amp;quot;Edit&amp;quot; behavior using a component override"></p>
+<p>我们在对此模式进行原型设计时使用的另一个示例是向多选组件中的标记添加编辑行为。在这种情况下，我们创建了一个组件覆盖<code>Tag</code>，为其渲染了现有的内容，同时注入了一个编辑标签。</p>
+<p>这说明了与 render props 相比允许注入完整组件的一个好处——你可以创建新的状态，生命周期方法，如果你需要的话甚至可以使用 React Hocks。我们的<code>EditableTag</code>组件在单击时能够显示模态，然后触发必要的 redux 操作以更新标记的名称。</p>
+<h2 id="fu-gai-nei-bu-shi-shi-zu-jian"><a class="header-anchor" href="#覆盖内部实施-组件"></a>覆盖内部实施（组件）</h2>
+<p>以下是我们 Autocomplete 组件内部可以实现的覆盖方法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Autocomplete.js</span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> defaultComponents <span class="keyword">from</span> <span class="string">'./styled-elements'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Autocomplete</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Setup &amp; handlers omitted to keep this example short</span></span><br><span class="line"></span><br><span class="line">  getSharedStyleProps() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;isOpen, isError&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      $isOpen: isOpen</span><br><span class="line">      $isError: isError</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;isOpen, query, value&#125; = <span class="keyword">this</span>.state;</span><br><span class="line">    <span class="keyword">const</span> &#123;options, overrides&#125; = <span class="keyword">this</span>.props;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> &#123;</span><br><span class="line">      Root: &#123;<span class="attr">component</span>: Root, <span class="attr">props</span>: rootProps&#125;,</span><br><span class="line">      Input: &#123;<span class="attr">component</span>: Input, <span class="attr">props</span>: inputProps&#125;,</span><br><span class="line">      List: &#123;<span class="attr">component</span>: List, <span class="attr">props</span>: listProps&#125;,</span><br><span class="line">      Option: &#123;<span class="attr">component</span>: Option, <span class="attr">props</span>: optionProps&#125;,</span><br><span class="line">    &#125; = getComponents(defaultComponents, overrides);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> sharedProps = <span class="keyword">this</span>.getSharedStyleProps();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Root &#123;...sharedProps&#125; &#123;...rootProps&#125;&gt;</span><br><span class="line">        &lt;Input</span><br><span class="line">          type=<span class="string">"text"</span></span><br><span class="line">          value=&#123;query&#125;</span><br><span class="line">          onChange=&#123;<span class="keyword">this</span>.onInputChange&#125;</span><br><span class="line">          &#123;...sharedProps&#125;</span><br><span class="line">          &#123;...inputProps&#125;</span><br><span class="line">        /&gt;</span><br><span class="line">        &#123;isOpen &amp;&amp; (</span><br><span class="line">          &lt;List &#123;...sharedProps&#125; &#123;...listProps&#125;&gt;</span><br><span class="line">            &#123;options.map(<span class="function"><span class="params">option</span> =&gt;</span> &#123;</span><br><span class="line">              &lt;Option</span><br><span class="line">                onClick=&#123;<span class="keyword">this</span>.onOptionClick.bind(<span class="keyword">this</span>, option)&#125;</span><br><span class="line">                $option=&#123;option&#125;</span><br><span class="line">                &#123;...sharedProps&#125;</span><br><span class="line">                &#123;...optionProps&#125;</span><br><span class="line">              &gt;</span><br><span class="line">                &#123;option.label&#125;</span><br><span class="line">              &lt;<span class="regexp">/Option&gt;</span></span><br><span class="line"><span class="regexp">            &#125;)&#125;</span></span><br><span class="line"><span class="regexp">          &lt;/</span>List&gt;</span><br><span class="line">        )&#125;</span><br><span class="line">      &lt;<span class="regexp">/Root&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line">// https://gist.github.com/schnerd/30c1415b7621d0e71352aa0c0184f175#file-overrides-example-internal-js</span><br></pre></td></tr></table></figure>
+<p>请注意，render 方法不包含像<code>&lt;div&gt;</code>这样的原生 DOM。我们从相邻的文件中导入默认的子组件。在这个文件中我们使用 CSS-in-JS 库来创建封装所有默认样式的组件。如果组件传递了<code>overrides</code>，则它优先于这些默认值。</p>
+<p><code>getComponents</code>只是一个很简单的辅助函数，我们使用它来解压需要覆盖的参数并将它们与组件的默认样式合并到一处。很多方法可以实现这，下面是个简短的示例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getComponents</span>(<span class="params">defaultComponents, overrides</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.keys(defaultComponents).reduce(<span class="function">(<span class="params">acc, name</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> override = overrides[name] || &#123;&#125;;</span><br><span class="line">    acc[name] = &#123;</span><br><span class="line">      component: override.component || defaultComponents[name],</span><br><span class="line">      props: &#123; <span class="attr">$style</span>: override.style, ...override.props &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> acc;</span><br><span class="line">  &#125;, &#123;&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// https://gist.github.com/schnerd/c6753b941954f96ec16fea2ce47e74d8#file-overrides-example-getcomponents-js</span></span><br></pre></td></tr></table></figure>
+<p>这个函数指定了 style 覆盖到为名为<code>$style</code>的 prop，并将其与其他的覆盖 prop 合并到一起——这主要是因为我们使用 CSS-in-JS 实现了查找<code>$style</code>并将其与默认样式深度合并。</p>
+<p>每个子组件也接受<code>sharedProps</code>，它可以用于动态更改样式或渲染——例如，在出现错误时将 border-color 设置为 red。我们将这些 props 添加<code>$</code>前缀作为一个命名规则的约定，以表明这些是特殊的 props，不应该传递给底层的 DOM 元素。</p>
+<h2 id="quan-heng-amp-xian-jing"><a class="header-anchor" href="#权衡-陷阱"></a>权衡 &amp; 陷阱</h2>
+<p>与大多数设计模式一样，在使用覆盖模式的时候也需要全更一些因素。</p>
+<h3 id="gang-xing"><a class="header-anchor" href="#刚性"></a>刚性</h3>
+<p>因为每个内部元素都有一个标识符并作为覆盖的目标公开，所以更改 DOM 结构可能会导致超出预期的变化出现频次高于正常情况。对于 CSS 的变化来说也会有同样的问题——改变元素样式从<code>display: flex</code>到<code>display: block</code>理论上同样是个重大的改变，如果使用者觉得这是一个 flexbox 的内部并这样覆盖其中一个子元素的样式。通常都整齐封装的组件实际上可能会使下游受到影响从而出现问题。</p>
+<p>所以的这些都意味着你可能需要更加小心地改变组件的 DOM 结构或者样式，并且不要害怕当一个主要版本的修改受到质疑的时候。</p>
+<h3 id="wen-dang"><a class="header-anchor" href="#文档"></a>文档</h3>
+<p>现在你的内部元素是公共 API 的一部分，你可能会希望编写一个文档去描述每个元素以及它可以传入的 porps。包括使用一些简单的图表来描述它的 DOM 结构，以及它们的标识。</p>
+<p>使用 TypeScripts 或 Flow 这类可以静态类型检查的方法在这里会是一个很棒的方案，因为它将使开发人员清楚地知道每个组件可以接受哪些 props，以及你覆盖的方式是否兼容。</p>
+<h3 id="zu-cheng"><a class="header-anchor" href="#组成"></a>组成</h3>
+<p>想象一下，你正在使用<code>Button</code>组件来构建一个可复用的<code>Pagination</code>组件来完成分页功能，我们如何将<code>Pagination</code>组件内的<code>Button</code>组件覆盖方法暴露出来呢？如果有多个按钮（例如：首页、上一页、下一页、尾页等），使用者可能想要以不同的方式去设置该怎么办？我们对于如何处理这一类问题有些<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ViZXItd2ViL2Jhc2V1aS9pc3N1ZXMvMzc1" title="https://github.com/uber-web/baseui/issues/375">想法<i class="fa fa-external-link"></i></span>，但是这并不能解决根本，在最终方案出现之前还需要反复地去实验。</p>
+<h3 id="fu-za-xing"><a class="header-anchor" href="#复杂性"></a>复杂性</h3>
+<p>支持组件的复用会提升其复杂性，并且破事你更加批判性的考虑使用者如何覆盖你的内部组件。如果你只是构建一个将在自己的应用程序中重复使用几次的组件，那么这种复杂性的增加可能并不值得。但是如果你正在构建一个可供数百名工程师使用的可复用的组件库，那么为了这些使用者的便利而牺牲简洁的写法就非常有意义了。对于我们来说这是一个简单的决定，因为那工程师使用组件时那些有趣的用法一直令我们印象深刻。</p>
+<h2 id="zhan-wang"><a class="header-anchor" href="#展望"></a>展望</h2>
+<p>现在来说，覆盖模式只是一种模式，并没有刻意安装的库或者包，但是如果你想看看我们在自己的组件库中如何使用这个模式，你可以在<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ViZXItd2ViL2Jhc2V1aQ==" title="https://github.com/uber-web/baseui">github<i class="fa fa-external-link"></i></span>上浏览我们的项目。</p>
+<p>希望你发现这个模式刻意很有用，或者至少有一些关于如何提高你的 React 组件复用率的新想法！</p>
+<p>—</p>
+<p><em>有疑问或想法吗？你可以发表评论或者在推特上找到我哦：@dschnr</em></p>
+<p>原文链接: <span class="exturl" data-url="aHR0cHM6Ly9tZWRpdW0uY29tL0Bkc2NobnIvYmV0dGVyLXJldXNhYmxlLXJlYWN0LWNvbXBvbmVudHMtd2l0aC10aGUtb3ZlcnJpZGVzLXBhdHRlcm4tOWVjYTIzMzlmNjQ2" title="https://medium.com/@dschnr/better-reusable-react-components-with-the-overrides-pattern-9eca2339f646">https://medium.com/@dschnr/better-reusable-react-components-with-the-overrides-pattern-9eca2339f646<i class="fa fa-external-link"></i></span></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>ZakaryCode</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536.html" title="覆盖模式——提高React组件的复用率">https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/ECMAScript/" rel="tag"># ECMAScript</a>
+          
+            <a href="/tags/frame/" rel="tag"># 框架</a>
+          
+            <a href="/tags/translation/" rel="tag"># 译文</a>
+          
+            <a href="/tags/React/" rel="tag"># React</a>
+          
+            <a href="/tags/Styled-Components/" rel="tag"># 组件样式</a>
+          
+            <a href="/tags/CSS-In-JS/" rel="tag"># CSS In JS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/front-end/frame/React/Component/1530426597.html" rel="next" title="React PureComponent 使用指南">
+                <i class="fa fa-chevron-left"></i> React PureComponent 使用指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/front-end/frame/React/1546835543.html" rel="prev" title="使用 React.lazy() 和 Suspense 提高React应用程序的性能">
+                使用 React.lazy() 和 Suspense 提高React应用程序的性能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/Z.png" alt="ZakaryCode">
+            
+              <p class="site-author-name" itemprop="name">ZakaryCode</p>
+              <p class="site-description motion-element" itemprop="description">日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90Lm1lL1pha2FyeUNvZGU=" title="Telegram &rarr; https://t.me/ZakaryCode"><i class="fa fa-fw fa-telegram"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9wbHVzLmdvb2dsZS5jb20vMTA3NzcwNDA4OTQ5MDgzMzU5NTgz" title="Google &rarr; https://plus.google.com/107770408949083359583"><i class="fa fa-fw fa-google"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aYWthcnlDb2Rl" title="Twitter &rarr; https://twitter.com/ZakaryCode"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tLzEwMDAxNDk1MzUzODEwMg==" title="FB Page &rarr; https://www.facebook.com/100014953538102"><i class="fa fa-fw fa-facebook"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpha2FyeWNvZGVAZ21haWwuY29t" title="E-Mail &rarr; mailto:zakarycode@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#fu-gai-gong-gong-de-api"><span class="nav-number">1.</span> <span class="nav-text">覆盖公共的 API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fu-gai-zu-jian-xing-wei"><span class="nav-number">2.</span> <span class="nav-text">覆盖组件行为</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fu-gai-nei-bu-shi-shi-zu-jian"><span class="nav-number">3.</span> <span class="nav-text">覆盖内部实施（组件）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quan-heng-amp-xian-jing"><span class="nav-number">4.</span> <span class="nav-text">权衡 &amp; 陷阱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gang-xing"><span class="nav-number">4.1.</span> <span class="nav-text">刚性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wen-dang"><span class="nav-number">4.2.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zu-cheng"><span class="nav-number">4.3.</span> <span class="nav-text">组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fu-za-xing"><span class="nav-number">4.4.</span> <span class="nav-text">复杂性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zhan-wang"><span class="nav-number">5.</span> <span class="nav-text">展望</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu"> </span>&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-bolt"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zakary Zhu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://zakarycode.disqus.com/count.js" async></script>
+  
+
+  
+    <script>
+      var disqus_config = function () {
+        this.page.url = "https://zakarycode.github.io/archives/front-end/frame/React/Component/1546591536.html";
+        this.page.identifier = "archives/front-end/frame/React/Component/1546591536.html";
+        this.page.title = '覆盖模式——提高React组件的复用率';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zakarycode.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        $(function () {
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          if (offsetTop <= 0) {
+            // load directly when there's no a scrollbar
+            loadComments();
+          } else {
+            $(window).on('scroll.disqus_scroll', function () {
+              // offsetTop may changes because of manually resizing browser window or lazy loading images.
+              var offsetTop = $('#comments').offset().top - $(window).height();
+              var scrollTop = $(window).scrollTop();
+
+              // pre-load comments a bit? (margin or anything else)
+              if (offsetTop - scrollTop < 60) {
+                $(window).off('.disqus_scroll');
+                loadComments();
+              }
+            });
+          }
+        });
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('manual', "#more");
+  
+  </script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>

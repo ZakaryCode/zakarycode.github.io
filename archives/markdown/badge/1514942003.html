@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CH,zh-cn,en,default">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2">
+
+
+
+
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+
+
+
+
+
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="/css/main.css?v=6.6.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-z.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-z.png?v=6.6.0">
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+  <meta name="description" content="许多同学在 GitHub 上发布了自己的开源项目，有辛苦开发的实用工具、构思巧妙的开源库、别具一格的 App、精心整理的示例代码等等。 自己花了大把时间和精力构建的项目，当然是希望能够得到更多人的关注，被更多的人知晓或者使用。如何更好滴向他人展示自己的项目，介绍项目相关信息呢？用一些通用的小图标来描述项目相关信息不失为一种很棒的选择，几个好看的徽标能够为自己的项目说明增色不少！ 提示：因为文中某些">
+<meta name="keywords" content="归纳,转载,github,markdown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub 项目徽章的添加和设置">
+<meta property="og:url" content="https://zakarycode.github.io/archives/markdown/badge/1514942003.html">
+<meta property="og:site_name" content="Zakary Zhu&#39;s Blog">
+<meta property="og:description" content="许多同学在 GitHub 上发布了自己的开源项目，有辛苦开发的实用工具、构思巧妙的开源库、别具一格的 App、精心整理的示例代码等等。 自己花了大把时间和精力构建的项目，当然是希望能够得到更多人的关注，被更多的人知晓或者使用。如何更好滴向他人展示自己的项目，介绍项目相关信息呢？用一些通用的小图标来描述项目相关信息不失为一种很棒的选择，几个好看的徽标能够为自己的项目说明增色不少！ 提示：因为文中某些">
+<meta property="og:locale" content="zh-CH">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3baec35425?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bad393229?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3baf4c1255?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bb28d717f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bb2ff6497?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bb260e2c2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bda89601e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3c62a7de14?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://img.shields.io/cocoapods/dw/AFNetworking.svg">
+<meta property="og:image" content="https://img.shields.io/cocoapods/v/Alamofire.svg?style=flat">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bdc61b539?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://img.shields.io/badge/360_store-v1.2.3-519dd9.svg">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bdc4d22b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bf1b4850f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3c5b911143?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://img.shields.io/cocoapods/p/Alamofire.svg?style=flat">
+<meta property="og:image" content="https://img.shields.io/badge/color-brightgreen-brightgreen.svg?maxAge=2592000">
+<meta property="og:image" content="https://img.shields.io/badge/color-green-green.svg?maxAge=2592000">
+<meta property="og:image" content="https://img.shields.io/badge/color-yellowgreen-yellowgreen.svg?maxAge=2592000">
+<meta property="og:image" content="https://img.shields.io/badge/weibo-@EyreFree-red.svg?style=social&link=http://weibo.com&link=http://weibo.com/u/5886291551">
+<meta property="og:image" content="https://img.shields.io/badge/twitter-@EyreFree777-blue.svg?colorA=abcdef">
+<meta property="og:image" content="https://img.shields.io/badge/twitter-@EyreFree777-blue.svg?colorB=abcdef">
+<meta property="og:image" content="https://img.shields.io/cocoapods/v/Alamofire.svg?colorB=000000">
+<meta property="og:image" content="https://img.shields.io/travis/onevcat/Kingfisher/master.svg">
+<meta property="og:image" content="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat">
+<meta property="og:image" content="https://img.shields.io/badge/SPM-ready-orange.svg">
+<meta property="og:image" content="https://img.shields.io/cocoapods/v/Kingfisher.svg?style=flat">
+<meta property="og:image" content="https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat">
+<meta property="og:image" content="https://img.shields.io/cocoapods/p/Kingfisher.svg?style=flat">
+<meta property="og:image" content="https://codebeat.co/assets/svg/badges/A-398b39-669406e9e1b136187b91af587d4092b0160370f271f66a651f444b990c2730e9.svg">
+<meta property="og:updated_time" content="2018-01-03T01:13:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GitHub 项目徽章的添加和设置">
+<meta name="twitter:description" content="许多同学在 GitHub 上发布了自己的开源项目，有辛苦开发的实用工具、构思巧妙的开源库、别具一格的 App、精心整理的示例代码等等。 自己花了大把时间和精力构建的项目，当然是希望能够得到更多人的关注，被更多的人知晓或者使用。如何更好滴向他人展示自己的项目，介绍项目相关信息呢？用一些通用的小图标来描述项目相关信息不失为一种很棒的选择，几个好看的徽标能够为自己的项目说明增色不少！ 提示：因为文中某些">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3baec35425?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zakary Zhu's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://zakarycode.github.io/archives/markdown/badge/1514942003.html">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GitHub 项目徽章的添加和设置 | Zakary Zhu's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CH">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Zakary Zhu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">Try to find the way about self-improvement.</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives menu-item-active">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/404/" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>Commonweal 404</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <span class="exturl github-corner" data-url="aHR0cHM6Ly9naXRodWIuY29tL1pha2FyeUNvZGU=" title="Follow me on GitHub" aria-label="Follow me on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></span>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://zakarycode.github.io/archives/markdown/badge/1514942003.html">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ZakaryCode">
+      <meta itemprop="description" content="日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。">
+      <meta itemprop="image" content="/images/Z.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zakary Zhu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">GitHub 项目徽章的添加和设置
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-03 09:13:23" itemprop="dateCreated datePublished" datetime="2018-01-03T09:13:23+08:00">2018-01-03</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/markdown/" itemprop="url" rel="index"><span itemprop="name">markdown</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/markdown/badge/" itemprop="url" rel="index"><span itemprop="name">badge</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/archives/markdown/badge/1514942003.html#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="archives/markdown/badge/1514942003.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>许多同学在 GitHub 上发布了自己的开源项目，有辛苦开发的实用工具、构思巧妙的开源库、别具一格的 App、精心整理的示例代码等等。</p>
+<p>自己花了大把时间和精力构建的项目，当然是希望能够得到更多人的关注，被更多的人知晓或者使用。如何更好滴向他人展示自己的项目，介绍项目相关信息呢？用一些通用的小图标来描述项目相关信息不失为一种很棒的选择，几个好看的徽标能够为自己的项目说明增色不少！</p>
+<p>提示：因为文中某些示例需要 GitHub 的 Markdown 环境支持，所以如果遇到阅读问题，可以在 GitHub 查看，地址为 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0V5cmVGcmVlL0VGQXJ0aWNsZXM=" title="https://github.com/EyreFree/EFArticles">github.com/EyreFree/EF…<i class="fa fa-external-link"></i></span>。</p>
+<a id="more"></a>
+<h2 id="hui-biao-jian-jie"><a class="header-anchor" href="#徽标简介"></a>徽标简介</h2>
+<p>GitHub 项目的 <span class="exturl" data-url="aHR0cDovL1JFQURNRS5tZA==" title="http://README.md">README.md<i class="fa fa-external-link"></i></span> 中可以添加徽章（Badge）对项目进行标记和说明，这些好看的小图标不仅简洁美观，而且还包含了清晰易读的信息。</p>
+<p>徽标主要由图片和对应的链接（当然，你可以不填）组成，徽标图片的话一般由左半部分的名称和右半部分的值组成。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3baec35425?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="一枚普通的徽标"></p>
+<p>GitHub 徽标的官方网站是 <span class="exturl" data-url="aHR0cDovL3NoaWVsZHMuaW8v" title="http://shields.io/">shields.io/<i class="fa fa-external-link"></i></span>，我萌可以在官网预览绝大部分的徽标样式，然后选择自己喜欢的（当然首先需要适用于自己的目标项目）徽标，添加到自己的项目文档中去。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bad393229?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Shields.IO"></p>
+<p>下面贴出几个例子以供参考：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3baf4c1255?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="还没用过的 ReSwift"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bb28d717f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="大名鼎鼎的 Kingfisher"></p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bb2ff6497?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="家喻户晓的 Alamofire"></p>
+<p>徽标并不是添加的越多越好，合理地选择适合项目的徽标做具有针对性地添加才是理性的做法，像 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0V5cmVGcmVlL0VGUVJDb2Rl" title="https://github.com/EyreFree/EFQRCode">EFQRCode<i class="fa fa-external-link"></i></span> 这样堆积徽标的无脑行为并不是十分可取，在这里提出这一点，希望大家不要盲目追求数量。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bb260e2c2?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="腊鸡 EFQRCode"></p>
+<p>当然如果个人比较喜欢的话，请随意添加。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bda89601e?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="请随意"></p>
+<h2 id="chang-yong-hui-biao-tian-jia"><a class="header-anchor" href="#常用徽标添加"></a>常用徽标添加</h2>
+<p>常用的徽标主要有持续集成状态、项目版本信息、代码测试覆盖率、项目支持平台、项目语言、代码分析等，下面我萌就来依次添加这些可爱的徽标！</p>
+<h3 id="chi-xu-ji-cheng-zhuang-tai"><a class="header-anchor" href="#持续集成状态"></a>持续集成状态</h3>
+<p>持续集成的话推荐 <span class="exturl" data-url="aHR0cHM6Ly90cmF2aXMtY2kub3JnLw==" title="https://travis-ci.org/">Travis CI<i class="fa fa-external-link"></i></span>，针对开源项目免费，所以你的私有项目无法享受到免费的持续构建服务，不过我们的目的貌似就是给开源项目添加徽标。</p>
+<p>同类型的产品还有 <span class="exturl" data-url="aHR0cHM6Ly9jaXJjbGVjaS5jb20=" title="https://circleci.com">CircleCI<i class="fa fa-external-link"></i></span>，不过目前跑 OS X 项目需要额外付费，免费版提供一个 Linux 项目队列，作为非付费用户在这里不多做评价，大佬们可以自己试下。其他还有诸如 <span class="exturl" data-url="aHR0cHM6Ly9qZW5raW5zLmlvLw==" title="https://jenkins.io/">Jenkins<i class="fa fa-external-link"></i></span> 和 <span class="exturl" data-url="aHR0cHM6Ly9jb2Rlc2hpcC5jb20v" title="https://codeship.com/">Codeship<i class="fa fa-external-link"></i></span> 等，大家可以在 <span class="exturl" data-url="aHR0cDovL3NoaWVsZHMuaW8v" title="http://shields.io/">shields.io/<i class="fa fa-external-link"></i></span> 的 <code>Build</code> 这一栏自行翻阅。</p>
+<p>接下来就是 Travis CI 的集成工作了，首先打开 <span class="exturl" data-url="aHR0cHM6Ly90cmF2aXMtY2kub3JnLw==" title="https://travis-ci.org/">travis-ci.org/<i class="fa fa-external-link"></i></span> 注册一个 Travis-CI 账号，可以通过 GitHub 账户直接登陆。</p>
+<p>然后参考 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLnRyYXZpcy1jaS5jb20vdXNlci9nZXR0aW5nLXN0YXJ0ZWQv" title="https://docs.travis-ci.com/user/getting-started/">官方文档<i class="fa fa-external-link"></i></span>，根据你的项目语言或类型选择具体的配置方式，主要就是在项目中添加一个 <code>.travis.yml</code> 配置文件，告诉 Travis CI 怎样对你的项目进行编译或测试。这里有一个 Swift CocoaPods 库的集成示例，可以参考一下：<span class="exturl" data-url="aHR0cDovL3d3dy5qaWFuc2h1LmNvbS9wL2JlYWE5ZWM5MTgzZA==" title="http://www.jianshu.com/p/beaa9ec9183d">www.jianshu.com/p/beaa9ec91…<i class="fa fa-external-link"></i></span>。</p>
+<p>然后徽标图片地址是这个样子的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://img.shields.io/travis/&#123;GitHub 用户名&#125;/&#123;项目名称&#125;.svg</span><br></pre></td></tr></table></figure>
+<p>将上面 URL 中的 {GitHub 用户名} 和 {项目名称} 替换为你的即可，再加上该项目在 Travis CI 上的地址，以 Alamofire 为例，最后集成完成的 Markdown 代码和效果大概是这个样子：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">![</span>](<span class="link">https://user-gold-cdn.xitu.io/2017/12/13/1604ec3c62a7de14</span>)](<span class="link">https://travis-ci.org/Alamofire/Alamofire</span>)</span><br></pre></td></tr></table></figure>
+<p><span class="exturl" data-url="aHR0cHM6Ly90cmF2aXMtY2kub3JnL0FsYW1vZmlyZS9BbGFtb2ZpcmU=" title="https://travis-ci.org/Alamofire/Alamofire"><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3c62a7de14?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"><i class="fa fa-external-link"></i></span></p>
+<p>当然如果你的编译没跑过或者发生错误之类的，会出现其他的状态，比如酱紫的：</p>
+<p>这里需要指出的是，开源项目的 Travis CI 也是公开的，包括日志和历史记录在内，都是针对所有人可见的，所以小伙伴们一定不要把密码、私钥等重要信息暴露了。</p>
+<h3 id="xiang-mu-xia-zai-liang"><a class="header-anchor" href="#项目下载量"></a>项目下载量</h3>
+<p>项目被下载的次数，这个的话各个平台的统计都是独立的，比如发布在 CocoaPods 的项目下载量徽标图片地址如下，以 AFNetworking 为例：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">总下载量：https://img.shields.io/cocoapods/dt/AFNetworking.svg</span><br><span class="line">月下载量：https://img.shields.io/cocoapods/dm/AFNetworking.svg</span><br><span class="line">周下载量：https://img.shields.io/cocoapods/dw/AFNetworking.svg</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="https://img.shields.io/cocoapods/dw/AFNetworking.svg" alt="img"></p>
+<p>如果你的库已经发布到 CocoaPods 的话，我们只要把上面的 AFNetworking 改为自己的项目名称即可。更多其他发布方式如 apm、npm、Gem 等可查阅 <span class="exturl" data-url="aHR0cDovL3NoaWVsZHMuaW8v" title="http://shields.io/">shields.io/<i class="fa fa-external-link"></i></span> 的 <code>Downloads</code> 一栏。</p>
+<h3 id="xiang-mu-ban-ben-xin-xi"><a class="header-anchor" href="#项目版本信息"></a>项目版本信息</h3>
+<p>这个的话，因为我的 iOS 库是发布在 CocoaPods 的，我用的是 CocoaPods 提供的，URL 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/cocoapods/v/&#123;项目名称&#125;.svg?style=flat</span><br></pre></td></tr></table></figure>
+<p>以 Alamofire 为例，Markdown 代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/v/Alamofire.svg?style=flat)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.shields.io/cocoapods/v/Alamofire.svg?style=flat" alt="img"></p>
+<p>如果你的库已经发布到 CocoaPods 的话，我们只要把上面的 Alamofire 改为自己的项目名称即可。更多其他发布方式如 apm、npm、Gem 等可查阅 <span class="exturl" data-url="aHR0cDovL3NoaWVsZHMuaW8v" title="http://shields.io/">shields.io/<i class="fa fa-external-link"></i></span> 的 <code>Version</code> 一栏，这里提供一个可以查询已发布的各种包的版本号徽标地址的网站 <span class="exturl" data-url="aHR0cHM6Ly9iYWRnZS5mdXJ5LmlvLw==" title="https://badge.fury.io/">badge.fury.io/<i class="fa fa-external-link"></i></span>，可以轻松获取对应包的徽标代码，如下图所示</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bdc61b539?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p>如果你的发布工具不提供项目版本信息的徽标的话，可以用自定义徽标的方式实现，具体可参考下文自定义徽标一节，这里给出徽标代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/badge/&#123;发布方式&#125;-&#123;版本号&#125;-519dd9.svg</span><br></pre></td></tr></table></figure>
+<p>将 {发布方式} 和 {版本号} 替换为你的项目目前的发布方式和版本号即可，例如通过 360 应用商店发布，发布版本号为 v1.2.3：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/360_store-v1.2.3-519dd9.svg)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.shields.io/badge/360_store-v1.2.3-519dd9.svg" alt="img"></p>
+<h3 id="dai-ma-ce-shi-fu-gai-lu"><a class="header-anchor" href="#代码测试覆盖率"></a>代码测试覆盖率</h3>
+<p>代码测试覆盖率的话推荐 <span class="exturl" data-url="aHR0cHM6Ly9jb2RlY292LmlvLw==" title="https://codecov.io/">Codecov<i class="fa fa-external-link"></i></span>。同类产品有 <span class="exturl" data-url="aHR0cHM6Ly9jb3ZlcmFsbHMuaW8v" title="https://coveralls.io/">Coveralls<i class="fa fa-external-link"></i></span>，不过网站风格略复古，文档也不详细，安装过程也复杂，需要配置一大堆奇怪的东西，遂不推荐。</p>
+<p>同样的，Codecov 可以直接使用 GitHub 账号登陆，需要结合 Travis CI 使用，在 <code>.travis.yml</code>文件中添加一个回调触发 Codecov 的刷新，同时需要打开工程中的测试覆盖信息收集，XCode 中的设置如下</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bdc4d22b3?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Paste_Image.png"></p>
+<p>更多信息可参考 <span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmNvZGVjb3YuaW8vZG9jcw==" title="https://docs.codecov.io/docs">官方文档<i class="fa fa-external-link"></i></span> 和 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NvZGVjb3Y=" title="https://github.com/codecov">示例<i class="fa fa-external-link"></i></span>。</p>
+<p>然后，我们就可以在 Setting 中的 Badge 一栏找到添加图标的代码啦：</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3bf1b4850f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="Paste_Image.png"></p>
+<p>最终效果如下：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jb2RlY292LmlvL2doL0V5cmVGcmVlL0VGUVJDb2Rl" title="https://codecov.io/gh/EyreFree/EFQRCode"><img src="https://user-gold-cdn.xitu.io/2017/12/13/1604ec3c5b911143?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="codecov"><i class="fa fa-external-link"></i></span></p>
+<h3 id="xiang-mu-zhi-chi-ping-tai"><a class="header-anchor" href="#项目支持平台"></a>项目支持平台</h3>
+<p>这个的话，因为我的 iOS 库是发布在 CocoaPods 的，我用的是 CocoaPods 提供的，URL 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/cocoapods/p/&#123;项目名称&#125;.svg?style=flat</span><br></pre></td></tr></table></figure>
+<p>以 Alamofire 为例，Markdown 代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/p/Alamofire.svg?style=flat)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.shields.io/cocoapods/p/Alamofire.svg?style=flat" alt="img"></p>
+<p>如果你的库已经发布到 CocoaPods 的话，我们只要把上面的 Alamofire 改为自己的项目名称即可。如果你的发布工具不提供项目支持平台的徽标的话，可以用自定义徽标的方式实现，具体可参考下文自定义徽标一节，这里给出徽标代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/badge/platform-&#123;项目支持平台&#125;-lightgrey.svg</span><br></pre></td></tr></table></figure>
+<p>将 {项目支持平台} 替换为你的项目目前的版本号即可，例如 ios：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/platform-ios-lightgrey.svg)</span><br></pre></td></tr></table></figure>
+<h3 id="xiang-mu-yu-yan"><a class="header-anchor" href="#项目语言"></a>项目语言</h3>
+<p>嗯，这个完全是用自定义徽标实现的，具体可参考下文自定义徽标一节，这里给出徽标代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/badge/language-&#123;项目语言&#125;-&#123;背景色&#125;.svg</span><br></pre></td></tr></table></figure>
+<p>将 {项目语言} 和 {背景色} 替换为你的项目目前的语言和你想要的背景色即可，这里以 Swift 为例，我们用上 Swift 官方橘色：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/language-swift-orange.svg)</span><br></pre></td></tr></table></figure>
+<p>完美!</p>
+<h3 id="dai-ma-zhi-liang-fen-xi"><a class="header-anchor" href="#代码质量分析"></a>代码质量分析</h3>
+<blockquote>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jb2RlYmVhdC5jby8=" title="https://codebeat.co/">Codebeat<i class="fa fa-external-link"></i></span> 可以计算全局项目评分、GPA、和不同命名空间的等级来帮助您量化技术债务和发现重构机会，你唯一需要做的就是连接你的 Github 库，获得反馈就好了。</p>
+</blockquote>
+<p>嗯，上面是官方自述，大概意思就是每次 push 或者 merge 之后会对代码进行分，给出评分，然后告诉你哪些地方复杂度过高需要进行重构之类的。用 GitHub 登陆后绑定项目即可，无需对原有项目进行修改（其实是 codebeat 在你的项目设置里加了一个 Webhook，通知它重新计算评分）。</p>
+<p>照着引导巴拉巴拉一顿操作之后就可以获取图标啦，在项目的 Setting 中可以获取徽标代码，自己复制出来就可以。</p>
+<p>最终效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">![codebeat badge</span>](<span class="link">data:image/svg+xml;utf8,</span>)](<span class="link">https://codebeat.co/projects/github-com-eyrefree-efqrcode-master</span>)</span><br></pre></td></tr></table></figure>
+<p>更多信息可参考我的另一篇博文 <span class="exturl" data-url="aHR0cDovL3d3dy5qaWFuc2h1LmNvbS9wLzBlZGZjOGM2NDIxZQ==" title="http://www.jianshu.com/p/0edfc8c6421e">利用 CodeBeat 为你在 GitHub 上的项目进行代码质量管理<i class="fa fa-external-link"></i></span>。</p>
+<h3 id="kai-yuan-xie-yi-lei-xing"><a class="header-anchor" href="#开源协议类型"></a>开源协议类型</h3>
+<p>这个的话，因为我的 iOS 库是发布在 CocoaPods 的，我用的是 CocoaPods 提供的，URL 如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/cocoapods/l/&#123;项目名称&#125;.svg?style=flat</span><br></pre></td></tr></table></figure>
+<p>以 Alamofire 为例，Markdown 代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/l/Alamofire.svg?style=flat)</span><br></pre></td></tr></table></figure>
+<p>如果你的库已经发布到 CocoaPods 的话，我们只要把上面的 Alamofire 改为自己的项目名称即可。如果你的发布工具不提供开源协议类型的徽标的话，可以用自定义徽标的方式实现，具体可参考下文自定义徽标一节，这里给出徽标代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/badge/license-&#123;协议名称&#125;-000000.svg</span><br></pre></td></tr></table></figure>
+<p>将 {协议名称} 替换为你的项目所使用的协议名称即可，例如 MIT：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/license-MIT-000000.svg)</span><br></pre></td></tr></table></figure>
+<p>![img](data:image/svg+xml;utf8,)</p>
+<h2 id="zi-ding-yi-hui-biao"><a class="header-anchor" href="#自定义徽标"></a>自定义徽标</h2>
+<h3 id="biao-ti-nei-rong-yan-se-lian-jie"><a class="header-anchor" href="#标题-内容-颜色-链接"></a>标题／内容／颜色／链接</h3>
+<p>如果以上这些徽标没有满足你的需求，我们还可以定制自己的个性化徽标，<code>shields.io</code> 提供了添加自定义徽标的功能，通过修改如下 URL 即可获取自定义徽标图片：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/badge/&#123;徽标标题&#125;-&#123;徽标内容&#125;-&#123;徽标颜色&#125;.svg</span><br></pre></td></tr></table></figure>
+<p>{徽标标题}：徽标左半部分的文本（短线：–，下划线：_<em>，空格： 或</em>）；<br>
+{徽标内容}：徽标右半部分的文本，同上；<br>
+{徽标颜色}：徽标右半部分背景颜色，可以是 red、green、blue 等颜色英文单词，也可以直接写十六进制的颜色值，如 ff69b4，示例如下：</p>
+<p><img src="https://img.shields.io/badge/color-brightgreen-brightgreen.svg?maxAge=2592000" alt="img"></p>
+<p><img src="https://img.shields.io/badge/color-green-green.svg?maxAge=2592000" alt="img"></p>
+<p><img src="https://img.shields.io/badge/color-yellowgreen-yellowgreen.svg?maxAge=2592000" alt="img"></p>
+<p>将其中的 {徽标标题}、{徽标内容}、{徽标颜色} 分别替换为需要的内容即可，例如我的微博徽标图片地址如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://img.shields.io/badge/weibo-@EyreFree-red.svg</span><br></pre></td></tr></table></figure>
+<p>再结合我的微博地址 <span class="exturl" data-url="aHR0cDovL3dlaWJvLmNvbS9leXJlZnJlZTc3Nw==" title="http://weibo.com/eyrefree777">weibo.com/eyrefree777<i class="fa fa-external-link"></i></span> 后完整徽标代码和效果如下（如果这段代码用在 GitHub 的话，点击该徽标会打开对应的 URL 地址，即直接跳到我的微博）：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">![</span>](<span class="link">https://img.shields.io/badge/weibo-@EyreFree-red.svg</span>)](<span class="link">http://weibo.com/eyrefree777</span>)</span><br></pre></td></tr></table></figure>
+<p><span class="exturl" data-url="aHR0cDovL3dlaWJvLmNvbS9leXJlZnJlZTc3Nw==" title="http://weibo.com/eyrefree777">![img](data:image/svg+xml;utf8,)<i class="fa fa-external-link"></i></span></p>
+<p>同理我的推特徽标代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">![</span>](<span class="link">https://img.shields.io/badge/twitter-@EyreFree777-blue.svg</span>)](<span class="link">https://twitter.com/EyreFree777</span>)</span><br></pre></td></tr></table></figure>
+<p><span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9FeXJlRnJlZTc3Nw==" title="https://twitter.com/EyreFree777">![img](data:image/svg+xml;utf8,)<i class="fa fa-external-link"></i></span></p>
+<h3 id="fu-jia-can-shu"><a class="header-anchor" href="#附加参数"></a>附加参数</h3>
+<p>可以在徽标图片 URL 后面带上一些参数来控制徽标的样式，这一部分是可选的，不想折腾的话默认的样式就挺好了，可以不看这里的。</p>
+<p>使用方法就是在徽标图片 URL 后面跟上 <code>?{参数名}={参数值}</code></p>
+<p>多个参数联用的话就是 <code>?{参数名1}={参数值1}&amp;{参数名2}={参数值2}...</code></p>
+<h4 id="style"><a class="header-anchor" href="#style"></a>style</h4>
+<p>style 控制徽标的主体样式，有四种，不设置的话默认是 <code>flat</code> 的，示例代码和效果如下：</p>
+<h5 id="plastic"><a class="header-anchor" href="#plastic"></a>plastic</h5>
+<p>塑料？大概是指立体效果</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/v/Alamofire.svg?style=plastic)</span><br></pre></td></tr></table></figure>
+<h5 id="flat"><a class="header-anchor" href="#flat"></a>flat</h5>
+<p>正常的样子，扁平化</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/v/Alamofire.svg?style=flat)</span><br></pre></td></tr></table></figure>
+<h5 id="flat-square"><a class="header-anchor" href="#flat-square"></a>flat-square</h5>
+<p>扁平化 + 去除圆角</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/v/Alamofire.svg?style=flat-square)</span><br></pre></td></tr></table></figure>
+<h5 id="social"><a class="header-anchor" href="#social"></a>social</h5>
+<p>社交样式</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/v/Alamofire.svg?style=social)</span><br></pre></td></tr></table></figure>
+<h4 id="label"><a class="header-anchor" href="#label"></a>label</h4>
+<p>该参数可以用来强制覆盖原有的徽标标题文字，效果如下，原有的 pod 字样已经被覆盖了：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/v/Alamofire.svg?label=healthinesses)</span><br></pre></td></tr></table></figure>
+<h4 id="logo"><a class="header-anchor" href="#logo"></a>logo</h4>
+<p>该参数可以用来为徽标添加 logo，logo 图片会出现在左半部分的徽标标题左边，logo 图片高度必须 ≥ 14px，logo 图片需要先转为 base64 编码然后直接插入到 URL 中（可以用 <span class="exturl" data-url="aHR0cDovL2I2NC5pby8=" title="http://b64.io/">b64.io/<i class="fa fa-external-link"></i></span> 将图片转为 base64 编码的字符串），格式如下。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?logo=&#123;base64 编码后的图片数据&#125;</span><br></pre></td></tr></table></figure>
+<p>示例代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/gadget-Raspberry%20Pi-pink.svg?logo=data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAACJ0lEQVR4AW2Qy0tUfxjGv3Pm3O%2BXGec3jnMZZ9Rxxp%2BWkYpJ2QkVIzDpkkoGBSOpBZmWgRIkWSs30SJchC26B9aijKLaFET9Be1q46ayRVDU5uk9Q8seeOG8X573eT/nZbwQqo5l5Rube52PQdH3BcaY4SbEiy2%2B/WFLv7ueblJv0luJmRHBHzqfwuyDRkzfKqB8pRZeQnwzuZynvgHTtwsYvZRBs2%2BVGSU5nfsjX2bocexqDsMLKXgZCQfmkzi6lK0EDJxOfNJdoYORQl5O3OeXY5%2BH59PI5XXUMh3RuIQR6v2J2Ld8h3488FXMBWb2TJkNPw9GUzirF3HX2oZFrQUD0Rqc84rfVcaPs0D/cTK/Q6y6N6eVsJX3MCglcUzJYVytw6CYxKRSj1Elu0bWCBNCXCnPGz96pTieOTvxyN6OIm/hid2Nx1SzWhGxsLwR4aQ9rFOMPl8lwwQlvXZ78NLZhRbBwZrTjReOjzuENKc1YUTOrLJ%2BKf7%2BsrEJhIL7dhfOaI34n7cxpRWwYnbghFqPMmENyelXzOLE0d1SNbrFGOKcgmDwnduH61Y7zJCAvVINDisZJMPqNEuHVeOQnPr11u3FESWLa2ZbBecp8VNaZXBBb15njHUxmxPC7YK3uGS0YkzNo1VwcZJWtwkeThHKMg33SfEVMqsskBeSjLqwMZYKa18ppXKRwESIv0u8NVPFyRb7hxK0ZYX%2BfIPO95D6KBXH/uoPnu/BfZ7Zxb0AAAAASUVORK5CYII)</span><br></pre></td></tr></table></figure>
+<h4 id="logo-width"><a class="header-anchor" href="#logowidth"></a>logoWidth</h4>
+<p>该参数可以设置在上一个参数 logo 中添加的图标的宽度，设为 0 的话即为忽略该参数，示例代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/gadget-Raspberry%20Pi-pink.svg?logoWidth=100&amp;logo=data%3Aimage/png%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAACJ0lEQVR4AW2Qy0tUfxjGv3Pm3O%2BXGec3jnMZZ9Rxxp%2BWkYpJ2QkVIzDpkkoGBSOpBZmWgRIkWSs30SJchC26B9aijKLaFET9Be1q46ayRVDU5uk9Q8seeOG8X573eT/nZbwQqo5l5Rube52PQdH3BcaY4SbEiy2%2B/WFLv7ueblJv0luJmRHBHzqfwuyDRkzfKqB8pRZeQnwzuZynvgHTtwsYvZRBs2%2BVGSU5nfsjX2bocexqDsMLKXgZCQfmkzi6lK0EDJxOfNJdoYORQl5O3OeXY5%2BH59PI5XXUMh3RuIQR6v2J2Ld8h3488FXMBWb2TJkNPw9GUzirF3HX2oZFrQUD0Rqc84rfVcaPs0D/cTK/Q6y6N6eVsJX3MCglcUzJYVytw6CYxKRSj1Elu0bWCBNCXCnPGz96pTieOTvxyN6OIm/hid2Nx1SzWhGxsLwR4aQ9rFOMPl8lwwQlvXZ78NLZhRbBwZrTjReOjzuENKc1YUTOrLJ%2BKf7%2BsrEJhIL7dhfOaI34n7cxpRWwYnbghFqPMmENyelXzOLE0d1SNbrFGOKcgmDwnduH61Y7zJCAvVINDisZJMPqNEuHVeOQnPr11u3FESWLa2ZbBecp8VNaZXBBb15njHUxmxPC7YK3uGS0YkzNo1VwcZJWtwkeThHKMg33SfEVMqsskBeSjLqwMZYKa18ppXKRwESIv0u8NVPFyRb7hxK0ZYX%2BfIPO95D6KBXH/uoPnu/BfZ7Zxb0AAAAASUVORK5CYII)</span><br></pre></td></tr></table></figure>
+<h4 id="link"><a class="header-anchor" href="#link"></a>link</h4>
+<p>据说该参数是用来设置点击后跳转的 URL 的（嗯，俗称超链接），官方描述如下：</p>
+<ul>
+<li>Specify what clicking on the left/right of a badge should do (esp. for social badge style)</li>
+</ul>
+<p>不过试了一下好像没啥效果（并且实在是没想明白怎么通过返回的图片控制不同点击区域的跳转），如果有大佬知道的求指点，感谢！</p>
+<p><img src="https://img.shields.io/badge/weibo-@EyreFree-red.svg?style=social&amp;link=http://weibo.com&amp;link=http://weibo.com/u/5886291551" alt="img"></p>
+<h4 id="color-a"><a class="header-anchor" href="#colora"></a>colorA</h4>
+<p>该参数用来控制徽标左半部分的背景色，只能用十六进制的颜色作为参数哦，不能直接写 red、green、blue 之类的，这里将左半部分的背景色改为 0xabcdef，代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/twitter-@EyreFree777-blue.svg?colorA=abcdef)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.shields.io/badge/twitter-@EyreFree777-blue.svg?colorA=abcdef" alt="img"></p>
+<h4 id="color-b"><a class="header-anchor" href="#colorb"></a>colorB</h4>
+<p>该参数用来控制徽标右半部分的背景色，同上，只能用十六进制的颜色作为参数哦，不能直接写 red、green、blue 之类的，这里将右半部分的背景色改为 0xabcdef，代码和效果如下：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/badge/twitter-@EyreFree777-blue.svg?colorB=abcdef)</span><br></pre></td></tr></table></figure>
+<p><img src="https://img.shields.io/badge/twitter-@EyreFree777-blue.svg?colorB=abcdef" alt="img"></p>
+<h4 id="max-age"><a class="header-anchor" href="#maxage"></a>maxAge</h4>
+<p>该参数用来设置 HTTP 缓存时间，以秒为单位，直接在 svg 地址后跟 <code>?maxAge={缓存秒数}</code> 即可，好像没啥好预览的，不放效果图了。</p>
+<h4 id="bei-zhu"><a class="header-anchor" href="#备注"></a>备注</h4>
+<p>这里需要注意的是，如果你是引用的第三方 svg 然后添加自己的样式，如果该样式之前已经被第三方添加过，是不一定会覆盖第三方的设置的，也就是说自己设置的属性不一定会生效…例如下面的代码设置 colorB 就没生效：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](https://img.shields.io/cocoapods/v/Alamofire.svg?colorB=000000)</span><br></pre></td></tr></table></figure>
+<p>右半部分应该变成黑色，但是毫无效果的说：</p>
+<p><img src="https://img.shields.io/cocoapods/v/Alamofire.svg?colorB=000000" alt="img"></p>
+<h2 id="qi-ta"><a class="header-anchor" href="#其他"></a>其他</h2>
+<p>默认的徽标是居左排列的，如果需要居中排列需要使用 HTML 的方式来插入徽标，可参考 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29uZXZjYXQvS2luZ2Zpc2hlcg==" title="https://github.com/onevcat/Kingfisher">Kingfisher<i class="fa fa-external-link"></i></span>，代码和效果如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://travis-ci.org/onevcat/Kingfisher"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>![](https://img.shields.io/travis/onevcat/Kingfisher/master.svg)<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://github.com/Carthage/Carthage/"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>![](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://swift.org/package-manager/"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>![](https://img.shields.io/badge/SPM-ready-orange.svg)<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://onevcat.github.io/Kingfisher/"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>![](https://img.shields.io/cocoapods/v/Kingfisher.svg?style=flat)<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://raw.githubusercontent.com/onevcat/Kingfisher/master/LICENSE"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>![](https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat)<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://onevcat.github.io/Kingfisher/"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>![](https://img.shields.io/cocoapods/p/Kingfisher.svg?style=flat)<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://codebeat.co/projects/github-com-onevcat-kingfisher"</span></span></span><br><span class="line"><span class="tag">    &gt;</span>![codebeat</span><br><span class="line">    badge](https://codebeat.co/assets/svg/badges/A-398b39-669406e9e1b136187b91af587d4092b0160370f271f66a651f444b990c2730e9.svg)<span class="tag">&lt;/<span class="name">a</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><span class="exturl" data-url="aHR0cHM6Ly90cmF2aXMtY2kub3JnL29uZXZjYXQvS2luZ2Zpc2hlcg==" title="https://travis-ci.org/onevcat/Kingfisher"><img src="https://img.shields.io/travis/onevcat/Kingfisher/master.svg" alt=""><i class="fa fa-external-link"></i></span><br>
+<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0NhcnRoYWdlL0NhcnRoYWdlLw==" title="https://github.com/Carthage/Carthage/"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt=""><i class="fa fa-external-link"></i></span><br>
+<span class="exturl" data-url="aHR0cHM6Ly9zd2lmdC5vcmcvcGFja2FnZS1tYW5hZ2VyLw==" title="https://swift.org/package-manager/"><img src="https://img.shields.io/badge/SPM-ready-orange.svg" alt=""><i class="fa fa-external-link"></i></span><br>
+<span class="exturl" data-url="aHR0cDovL29uZXZjYXQuZ2l0aHViLmlvL0tpbmdmaXNoZXIv" title="http://onevcat.github.io/Kingfisher/"><img src="https://img.shields.io/cocoapods/v/Kingfisher.svg?style=flat" alt=""><i class="fa fa-external-link"></i></span><br>
+<span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL29uZXZjYXQvS2luZ2Zpc2hlci9tYXN0ZXIvTElDRU5TRQ==" title="https://raw.githubusercontent.com/onevcat/Kingfisher/master/LICENSE"><img src="https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat" alt=""><i class="fa fa-external-link"></i></span><br>
+<span class="exturl" data-url="aHR0cDovL29uZXZjYXQuZ2l0aHViLmlvL0tpbmdmaXNoZXIv" title="http://onevcat.github.io/Kingfisher/"><img src="https://img.shields.io/cocoapods/p/Kingfisher.svg?style=flat" alt=""><i class="fa fa-external-link"></i></span><br>
+<span class="exturl" data-url="aHR0cHM6Ly9jb2RlYmVhdC5jby9wcm9qZWN0cy9naXRodWItY29tLW9uZXZjYXQta2luZ2Zpc2hlcg==" title="https://codebeat.co/projects/github-com-onevcat-kingfisher"><img src="https://codebeat.co/assets/svg/badges/A-398b39-669406e9e1b136187b91af587d4092b0160370f271f66a651f444b990c2730e9.svg" alt="codebeat badge"><i class="fa fa-external-link"></i></span></p>
+<p>没了，🙄</p>
+<hr>
+<p>再次提示：因为文中某些示例需要 GitHub 的 Markdown 环境支持，所以如果遇到阅读问题，比如某些 HTML 标签露了出来之类的，可以在 GitHub 查看，地址为 <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0V5cmVGcmVlL0VGQXJ0aWNsZXM=" title="https://github.com/EyreFree/EFArticles">github.com/EyreFree/EF…<i class="fa fa-external-link"></i></span>。</p>
+<hr>
+<p>再读一篇类似文章？</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81YTMyMTZjOGYyNjVkYTQzMzMzZTZiNTQ=" title="https://juejin.im/post/5a3216c8f265da43333e6b54">GitHub Wiki 页面的添加和设置<i class="fa fa-external-link"></i></span></p>
+<hr>
+<blockquote>
+<p>如有任何知识产权、版权问题或理论错误，还请指正。<br>
+<span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uaW0vcG9zdC81YTMyMTU3YzZmYjlhMDQ1MGI2NjY3YWM=" title="https://juejin.im/post/5a32157c6fb9a0450b6667ac">https://juejin.im/post/5a32157c6fb9a0450b6667ac<i class="fa fa-external-link"></i></span><br>
+转载请注明原作者及以上信息。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Post author:  </strong>ZakaryCode</li>
+  <li class="post-copyright-link">
+    <strong>Post link: </strong>
+    
+    <a href="https://zakarycode.github.io/archives/markdown/badge/1514942003.html" title="GitHub 项目徽章的添加和设置">https://zakarycode.github.io/archives/markdown/badge/1514942003.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> unless stating additionally.</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/inductive/" rel="tag"># 归纳</a>
+          
+            <a href="/tags/repost/" rel="tag"># 转载</a>
+          
+            <a href="/tags/github/" rel="tag"># github</a>
+          
+            <a href="/tags/markdown/" rel="tag"># markdown</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/front-end/network-request/ajax/1514362414.html" rel="next" title="30分钟学会反向Ajax">
+                <i class="fa fa-chevron-left"></i> 30分钟学会反向Ajax
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/archives/Nodejs/1521617316.html" rel="prev" title="关于第三方API跨域那些事">
+                关于第三方API跨域那些事 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/Z.png" alt="ZakaryCode">
+            
+              <p class="site-author-name" itemprop="name">ZakaryCode</p>
+              <p class="site-description motion-element" itemprop="description">日光之下并无新事，先行的事后必再行，已事无需纪念，先前已有。</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90Lm1lL1pha2FyeUNvZGU=" title="Telegram &rarr; https://t.me/ZakaryCode"><i class="fa fa-fw fa-telegram"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9wbHVzLmdvb2dsZS5jb20vMTA3NzcwNDA4OTQ5MDgzMzU5NTgz" title="Google &rarr; https://plus.google.com/107770408949083359583"><i class="fa fa-fw fa-google"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS9aYWthcnlDb2Rl" title="Twitter &rarr; https://twitter.com/ZakaryCode"><i class="fa fa-fw fa-twitter"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tLzEwMDAxNDk1MzUzODEwMg==" title="FB Page &rarr; https://www.facebook.com/100014953538102"><i class="fa fa-fw fa-facebook"></i></span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOnpha2FyeWNvZGVAZ21haWwuY29t" title="E-Mail &rarr; mailto:zakarycode@gmail.com"><i class="fa fa-fw fa-envelope"></i></span>
+                </span>
+              
+            </div>
+          
+
+          
+             <div class="cc-license motion-element" itemprop="license">
+              
+                
+              
+              
+              
+              <span class="exturl cc-opacity" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></span>
+             </div>
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hui-biao-jian-jie"><span class="nav-number">1.</span> <span class="nav-text">徽标简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chang-yong-hui-biao-tian-jia"><span class="nav-number">2.</span> <span class="nav-text">常用徽标添加</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#chi-xu-ji-cheng-zhuang-tai"><span class="nav-number">2.1.</span> <span class="nav-text">持续集成状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xiang-mu-xia-zai-liang"><span class="nav-number">2.2.</span> <span class="nav-text">项目下载量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xiang-mu-ban-ben-xin-xi"><span class="nav-number">2.3.</span> <span class="nav-text">项目版本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dai-ma-ce-shi-fu-gai-lu"><span class="nav-number">2.4.</span> <span class="nav-text">代码测试覆盖率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xiang-mu-zhi-chi-ping-tai"><span class="nav-number">2.5.</span> <span class="nav-text">项目支持平台</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xiang-mu-yu-yan"><span class="nav-number">2.6.</span> <span class="nav-text">项目语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dai-ma-zhi-liang-fen-xi"><span class="nav-number">2.7.</span> <span class="nav-text">代码质量分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kai-yuan-xie-yi-lei-xing"><span class="nav-number">2.8.</span> <span class="nav-text">开源协议类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zi-ding-yi-hui-biao"><span class="nav-number">3.</span> <span class="nav-text">自定义徽标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#biao-ti-nei-rong-yan-se-lian-jie"><span class="nav-number">3.1.</span> <span class="nav-text">标题／内容／颜色／链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fu-jia-can-shu"><span class="nav-number">3.2.</span> <span class="nav-text">附加参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#style"><span class="nav-number">3.2.1.</span> <span class="nav-text">style</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#plastic"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">plastic</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flat"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">flat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#flat-square"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">flat-square</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#social"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">social</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label"><span class="nav-number">3.2.2.</span> <span class="nav-text">label</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#logo"><span class="nav-number">3.2.3.</span> <span class="nav-text">logo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#logo-width"><span class="nav-number">3.2.4.</span> <span class="nav-text">logoWidth</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#link"><span class="nav-number">3.2.5.</span> <span class="nav-text">link</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#color-a"><span class="nav-number">3.2.6.</span> <span class="nav-text">colorA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#color-b"><span class="nav-number">3.2.7.</span> <span class="nav-text">colorB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#max-age"><span class="nav-number">3.2.8.</span> <span class="nav-text">maxAge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bei-zhu"><span class="nav-number">3.2.9.</span> <span class="nav-text">备注</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qi-ta"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu"> </span>&copy; 2017 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-bolt"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zakary Zhu</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <span class="exturl theme-link" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> v3.8.0</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery@2/dist/jquery.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/fastclick@1/lib/fastclick.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/jquery-lazyload@1/jquery.lazyload.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/velocity-animate@1/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+
+  
+  <script src="/lib/three/three.min.js"></script>
+
+  
+  <script src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://zakarycode.disqus.com/count.js" async></script>
+  
+
+  
+    <script>
+      var disqus_config = function () {
+        this.page.url = "https://zakarycode.github.io/archives/markdown/badge/1514942003.html";
+        this.page.identifier = "archives/markdown/badge/1514942003.html";
+        this.page.title = 'GitHub 项目徽章的添加和设置';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zakarycode.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        $(function () {
+          var offsetTop = $('#comments').offset().top - $(window).height();
+          if (offsetTop <= 0) {
+            // load directly when there's no a scrollbar
+            loadComments();
+          } else {
+            $(window).on('scroll.disqus_scroll', function () {
+              // offsetTop may changes because of manually resizing browser window or lazy loading images.
+              var offsetTop = $('#comments').offset().top - $(window).height();
+              var scrollTop = $(window).scrollTop();
+
+              // pre-load comments a bit? (margin or anything else)
+              if (offsetTop - scrollTop < 60) {
+                $(window).off('.disqus_scroll');
+                loadComments();
+              }
+            });
+          }
+        });
+      
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+        // ref: https://github.com/ForbesLindesay/unescape-html
+        var unescapeHtml = function(html) {
+          return String(html)
+            .replace(/&quot;/g, '"')
+            .replace(/&#39;/g, '\'')
+            .replace(/&#x3A;/g, ':')
+            // replace all the other &#x; chars
+            .replace(/&#(\d+);/g, function (m, p) { return String.fromCharCode(p); })
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&amp;/g, '&');
+        };
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                content = unescapeHtml(content);
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.6.0"></script>
+
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script>
+  
+    bookmark.scrollToMark('manual', "#more");
+  
+  </script>
+
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('Copied');
+          else $(this).text('Copy failed');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function () {
+          $b.text('Copy');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+  
+
+  
+  
+
+  
+
+
+</body>
+</html>
